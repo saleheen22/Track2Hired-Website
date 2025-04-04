@@ -1,18 +1,33 @@
 import Lottie from 'lottie-react';
-import React from 'react';
+import { useContext, useState } from 'react';
 import loginAnimation from '../assets/login.json';
 import { useForm } from 'react-hook-form';
-type LoginFormValues = {
-    email: string;
-    password: string;
-}
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { LoginFormValues } from '../utils/Types/loginType';
+import { AuthContext } from '../provider/AuthProvider';
+import { useNavigate } from 'react-router';
+
 const Login = () => {
+  const navigate = useNavigate();
+    const [passOn, setPassON] = useState<boolean>(false);
+    const {signInNewUser, setUser} = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}} = useForm<LoginFormValues>();
     const onSubmit = (data: LoginFormValues) => {
-        console.log(data);
+        signInNewUser(data).then((userCredential) => {
+          // Signed in 
+          const user = userCredential;
+          setUser(data);
+          console.log(user);
+          navigate('/');
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
     };
   return (
-    <div>
+    <div className='bg-base-200'>
       <h1>This is login page</h1>
      
       <div>
@@ -32,7 +47,7 @@ const Login = () => {
       />
               </p>
             </div>
-            <div className="card  w-full max-w-sm shrink-0 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] shadow-2xl">
+            <div className="card  w-full max-w-sm shrink-0  shadow-2xl">
               <div className="card-body">
                <form onSubmit={handleSubmit(onSubmit)}>
                <fieldset className="fieldset">
@@ -47,7 +62,7 @@ const Login = () => {
                   {errors.email && <span className='text-red-500 text-sm mt-1'>{errors.email.message}</span>}
                   <label className="fieldset-label">Password</label>
                   <input
-                    type="password"
+                    type={passOn ? 'password' : 'text'}
                     className="input"
                     placeholder="Password"
                     {...register('password', {
@@ -57,8 +72,14 @@ const Login = () => {
                             message: 'Password must be at least 6 characters',
                         }
                     })}
+                    
                   />
-                  {errors.email && <span className='text-red-500 text-sm mt-1'>{errors.email.message}</span>}
+                  {passOn ? <AiFillEyeInvisible className='cursor-pointer text-xl' onClick={()=> setPassON(!passOn)}  />: <AiFillEye className='cursor-pointer text-xl' onClick={()=> setPassON(!passOn)} />}
+
+                  
+
+
+                  {errors.password && <span className='text-red-500 text-sm mt-1'>{errors.password.message}</span>}
                   <div>
                     <a className="link link-hover">Forgot password?</a>
                   </div>
