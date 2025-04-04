@@ -9,6 +9,8 @@ import Page from '../pages/Page';
 import HomeLayout from '../Layouts/HomeLayout';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import PrivateRoute from './PrivateRoute';
+import Dummy from '../pages/Dummy';
 
 export const router = createBrowserRouter([
   {
@@ -27,5 +29,8 @@ export const router = createBrowserRouter([
   },
   {path: '/register',
     Component: Register
+  },
+  {path: '/dashboard',
+    element: <PrivateRoute><Dummy></Dummy></PrivateRoute>,
   }
 ]);

@@ -10,15 +10,19 @@ import { useNavigate } from 'react-router';
 const Login = () => {
   const navigate = useNavigate();
     const [passOn, setPassON] = useState<boolean>(false);
-    const {signInNewUser, setUser} = useContext(AuthContext);
+    const {signInNewUser, setUser, signInWithGoogle} = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}} = useForm<LoginFormValues>();
+    const handleGoogleSignIn = () => {
+      signInWithGoogle().then(() => navigate('/dashboard'));
+      
+    }
     const onSubmit = (data: LoginFormValues) => {
         signInNewUser(data).then((userCredential) => {
           // Signed in 
           const user = userCredential;
           setUser(data);
           console.log(user);
-          navigate('/');
+          navigate('/dashboard');
           // ...
         })
         .catch((error) => {
@@ -88,6 +92,7 @@ const Login = () => {
                </form>
               </div>
             </div>
+            <button onClick={handleGoogleSignIn} className='btn btn-blue-500'>Google SignIn</button>
           </div>
         </div>
       </div>
