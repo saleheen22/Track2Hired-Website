@@ -1,0 +1,210 @@
+/* Component-specific responsive adjustments */
+
+/* Header responsive adjustments */
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+  
+  .mobile-menu-button {
+    display: block;
+  }
+}
+
+/* Hero section responsive adjustments */
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+  }
+  
+  .hero-text,
+  .hero-image {
+    width: 100%;
+  }
+  
+  .hero-image {
+    margin-top: 2rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero-buttons a {
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+}
+
+/* Features section responsive adjustments */
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Extension showcase responsive adjustments */
+@media (max-width: 1024px) {
+  .extension-container {
+    flex-direction: column;
+  }
+  
+  .extension-description,
+  .extension-demo {
+    width: 100%;
+  }
+  
+  .extension-demo {
+    margin-top: 2rem;
+  }
+}
+
+/* Dashboard preview responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-container {
+    padding: 1rem;
+  }
+}
+
+/* AI capabilities responsive adjustments */
+@media (max-width: 1024px) {
+  .ai-tools-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ai-tool-card {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Call to action responsive adjustments */
+@media (max-width: 640px) {
+  .cta-buttons {
+    flex-direction: column;
+  }
+  
+  .cta-buttons a {
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+}
+
+/* Footer responsive adjustments */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-column {
+    margin-bottom: 2rem;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+  }
+  
+  .footer-bottom-links {
+    margin-top: 1rem;
+  }
+}
+
+/* Job tracking feature responsive adjustments */
+@media (max-width: 1024px) {
+  .job-tracking-container {
+    flex-direction: column-reverse;
+  }
+  
+  .job-tracking-description,
+  .job-tracking-demo {
+    width: 100%;
+  }
+  
+  .job-tracking-description {
+    margin-top: 2rem;
+  }
+}
+
+/* Dashboard feature responsive adjustments */
+@media (max-width: 1024px) {
+  .dashboard-feature-container {
+    flex-direction: column;
+  }
+  
+  .dashboard-feature-preview,
+  .dashboard-feature-description {
+    width: 100%;
+  }
+  
+  .dashboard-feature-description {
+    margin-top: 2rem;
+  }
+}
+
+/* AI feature responsive adjustments */
+@media (max-width: 1024px) {
+  .ai-feature-container {
+    flex-direction: column;
+  }
+  
+  .ai-feature-description,
+  .ai-feature-preview {
+    width: 100%;
+  }
+  
+  .ai-feature-preview {
+    margin-top: 2rem;
+  }
+  
+  .ai-feature-reverse {
+    flex-direction: column-reverse;
+  }
+}
+
+/* Touch-friendly adjustments for mobile */
+@media (max-width: 640px) {
+  .clickable-element {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .touch-target {
+    padding: 12px;
+  }
+}
+
+/* Improve form responsiveness */
+@media (max-width: 640px) {
+  input, 
+  select, 
+  textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+}
+
+/* Fix for mobile viewport height issues */
+@media (max-width: 640px) {
+  .full-height {
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+/* Ensure proper spacing on small screens */
+@media (max-width: 640px) {
+  .section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

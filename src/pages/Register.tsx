@@ -5,24 +5,30 @@ import { useForm } from 'react-hook-form';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { RegisterFormValues } from '../utils/Types/registerType';
 import { AuthContext } from '../provider/AuthProvider';
+import { useNavigate } from 'react-router';
 
-const Register = () => { 
-  const {createNewUser, setUser} = useContext(AuthContext);
+const Register = () => {
+  const navigate = useNavigate(); 
+  const {createNewUser} = useContext(AuthContext);
     const [passOn, setPassON] = useState<boolean>(false);
     const {register, handleSubmit, formState: {errors}, reset} = useForm<RegisterFormValues>();
     const onSubmit = (data: RegisterFormValues) => {
-      const {email, password} = data;
+      const {email, password, firstName, lastName} = data;
       reset();
-      createNewUser({email, password}).then((userCredential) => {
+      createNewUser({email, password, firstName, lastName}).then((userCredential) => {
         // Signed up 
-        const user = userCredential;
-        console.log(user);
-        setUser(data);
+        // const user = userCredential;
+        // console.log(user);
+        console.log(userCredential);
+        if(userCredential.success) {
+          navigate('/dashboard');
+        }
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
         // ..
       });;
     };

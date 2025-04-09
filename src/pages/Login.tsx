@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router';
 const Login = () => {
   const navigate = useNavigate();
     const [passOn, setPassON] = useState<boolean>(false);
-    const {signInNewUser, setUser, signInWithGoogle} = useContext(AuthContext);
+    const {signInNewUser,  signInWithGoogle} = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}} = useForm<LoginFormValues>();
     const handleGoogleSignIn = () => {
       signInWithGoogle().then(() => navigate('/dashboard'));
@@ -19,11 +19,13 @@ const Login = () => {
     const onSubmit = (data: LoginFormValues) => {
         signInNewUser(data).then((userCredential) => {
           // Signed in 
-          const user = userCredential;
-          setUser(data);
-          console.log(user);
-          navigate('/dashboard');
+          if (userCredential ) {
+            navigate('/dashboard');
           // ...
+          }
+          
+          
+          
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -44,12 +46,12 @@ const Login = () => {
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="text-center gap-6 lg:text-left">
               
-              <p className="py-6">
+              <div className="py-6">
               <Lottie
         animationData={loginAnimation}
         className="w-[300px] h-[300px] object-contain mx-auto"
       />
-              </p>
+              </div>
             </div>
             <div className="card  w-full max-w-sm shrink-0  shadow-2xl">
               <div className="card-body">
