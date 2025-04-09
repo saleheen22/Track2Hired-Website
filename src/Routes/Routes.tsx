@@ -13,6 +13,7 @@ import Dashboard from '../Layouts/Dashboard';
 import Jobs from '../pages/Jobs';
 import Job from '../pages/Jobs/Job';
 import JobTable from '../pages/Jobs/JobApplication';
+import TrackedJobs from '../pages/Jobs/TrackedJobs';
 
 export const router = createBrowserRouter([
   {
@@ -42,8 +43,8 @@ export const router = createBrowserRouter([
       path: '',
       Component: Jobs
     },{
-      path: 'job',
-      Component: Job
+      path: 'jobs',
+      Component: TrackedJobs
     }
   ]
   }
