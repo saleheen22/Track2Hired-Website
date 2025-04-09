@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import logo from '../../assets/logo_blue_resized.png';
 import { AuthContext } from '../../provider/AuthProvider';
 import { useLocation } from 'react-router';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+
 
 
 import { Link } from 'react-router';
@@ -33,7 +35,7 @@ const Navbar = () => {
         alt="Track2Hired Logo"
         className="md:h-9 h-12 w-auto mr-2 object-contain"
       />
-      <h1 className="flex justify-center text-center text-bold my-auto text-3xl font-bold
+      <h1 className="flex justify-center text-center text-bold my-auto text-3xl font-bold text-blue-600
  ">Track2Hired</h1>
       </div>
 
@@ -65,7 +67,8 @@ const Navbar = () => {
         onClick={toggleMenu}
         className="hamburger block md:hidden cursor-pointer bg-gray-100 px-2 py-1 rounded"
       >
-        {isOpen ? "this is close" : "this is hamburger"}
+        {isOpen ? <XMarkIcon className="h-8 w-8 text-gray-700"/>:<Bars3Icon className="h-8 w-8 text-gray-700" />
+        }
       </div>
 
       {/*
@@ -80,11 +83,11 @@ const Navbar = () => {
         ${isOpen ? "pointer-events-auto" : "pointer-events-none"}
       `}
       >
-        <div className="p-4 bg-base-200">
-          <h1 className="mt-4">this is menu bar #1</h1>
-          <h1 className='my-5'>this is menu bar #2</h1>
-          <h1>this is menu bar #3</h1>
-          <h1>this is menu bar #4</h1>
+        <div className="p-4 bg-base-300">
+        {menu.map((menu, idx)=> 
+        <h3 className="py-4 mx-4"><Link className='text-xl' key= {idx} to="/">{menu}</Link></h3>
+
+      )}
         </div>
       </div>
     </div>

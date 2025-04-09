@@ -8,7 +8,10 @@ const Dashboard = () => {
     <div>
       <DashboardNav></DashboardNav>
       <Sidebar></Sidebar>
-      <Outlet></Outlet>
+      <div className='ml-16 md:ml-64 '>
+        < Outlet ></Outlet>
+        </div>
+    
       <Footer></Footer>
     </div>
   );
