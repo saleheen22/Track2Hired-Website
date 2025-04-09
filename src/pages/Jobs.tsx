@@ -87,7 +87,7 @@ const handleGenerateCoverLetter = async (jobId: string) => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
     return (
-      <div>
+      <div className="ml-16 md:ml-64 p-4">
       <div className="overflow-x-auto">
           <table className="table">
               <thead>

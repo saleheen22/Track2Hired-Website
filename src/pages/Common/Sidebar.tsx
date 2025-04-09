@@ -11,7 +11,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <nav className="w-64 h-screen bg-gray-100 p-4 shadow-md fixed">
+    <nav className="w-16 md:w-64 h-screen bg-gray-100 p-4 shadow-md fixed">
       <ul className="space-y-4 hidden md:block">
         {navItems.map((item) => (
           <li key={item.path}>
