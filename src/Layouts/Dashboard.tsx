@@ -8,7 +8,7 @@ const Dashboard = () => {
     <div>
       <DashboardNav></DashboardNav>
       <Sidebar></Sidebar>
-      <div className='ml-16 md:ml-64 '>
+      <div className='mx-auto md:ml-64 '>
         < Outlet ></Outlet>
         </div>
     
