@@ -1,19 +1,31 @@
-
-
 import React from 'react';
+import { Link } from 'react-router';
 
 const Sidebar = () => {
-    return (
-        <div>
-            <ul>
-                <li>sidebar 1</li>
-                <li>sidebar 2</li>
-                <li>sidebar 3</li>
-                <li>sidebar 4</li>
-                <li>sidebar 5</li>
-            </ul>
-        </div>
-    );
+  const navItems = [
+    { label: "Dashboard", path: "/dashboard" },
+    { label: "Jobs", path: "/dashboard/jobs" },
+    { label: "Applications", path: "/dashboard/applications" },
+    { label: "Settings", path: "/dashboard/settings" },
+    { label: "Support", path: "/dashboard/support" },
+  ];
+
+  return (
+    <nav className="w-64 h-screen bg-gray-100 p-4 shadow-md fixed">
+      <ul className="space-y-4 hidden md:block">
+        {navItems.map((item) => (
+          <li key={item.path}>
+            <Link 
+              to={item.path} 
+              className="block px-4 py-2 rounded hover:bg-gray-200 transition-colors"
+            >
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
 };
 
 export default Sidebar;
