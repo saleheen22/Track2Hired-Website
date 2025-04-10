@@ -14,7 +14,7 @@ import Jobs from '../pages/Jobs';
 import Job from '../pages/Jobs/Job';
 import JobTable from '../pages/Jobs/JobApplication';
 import TrackedJobs from '../pages/Jobs/TrackedJobs';
-
+import Resume from '../pages/Resume'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -45,6 +45,9 @@ export const router = createBrowserRouter([
     },{
       path: 'jobs',
       Component: TrackedJobs
+    },{
+      path: 'resume',
+      Component: Resume
     }
   ]
   }

@@ -24,13 +24,6 @@ const DashboardNav = () => {
       <h1 className="flex justify-center text-center text-bold my-auto text-3xl font-bold
  ">Track2Hired</h1>
       </div>
-
-    
-        
-
-
-   
-
     
       <p>{user?.displayName}</p>
 

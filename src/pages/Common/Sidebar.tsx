@@ -7,8 +7,9 @@ const Sidebar = () => {
   const navItems = [
     { label: "Dashboard", path: "/dashboard" },
     { label: "Jobs", path: "/dashboard/jobs" },
-    { label: "Applications", path: "/dashboard/applications" },
-    { label: "Settings", path: "/dashboard/settings" },
+    { label: "Cover Letters", path: "/dashboard/cover-letters" },
+    { label: "Resume", path: "/dashboard/resume" },
+    
     { label: "Support", path: "/dashboard/support" },
   ];
   const [isOpen, setOpen] = useState<boolean>(false);
