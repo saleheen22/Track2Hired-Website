@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from './AuthProvider';
+// import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 export interface Job {
   jobID: string;
@@ -14,25 +15,33 @@ export interface Job {
   interview?: boolean;
   offer?: boolean;
   applied?: boolean;
+  interviewDate?: Date | null | string;
+  dateExtracted?: Date | null | string;
 }
 
 interface JobsContextType {
   jobs: Job[];
   setJobs: React.Dispatch<React.SetStateAction<Job[]>>;
   toggleStatus: (jobID: string, field: 'interview' | 'offer' | 'applied') => Promise<void>;
+  updateInterviewDate: (jobID: string, date: Date | null) => Promise<void>;
+
 
 }
 
 export const JobsContext = createContext<JobsContextType>({
   jobs: [],
   setJobs: () => {},
-  toggleStatus: async () => {}
+  toggleStatus: async () => {},
+  updateInterviewDate: async () => {}
+
 
 });
 
 export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useContext(AuthContext);
   const [jobs, setJobs] = useState<Job[]>([]);
+  // const queryClient = useQueryClient();
+
 
   useEffect(() => {
     if (user?.email) {
@@ -41,7 +50,7 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .then((response) => setJobs(response.data))
         .catch((error) => console.error('Failed to load jobs:', error));
     }
-  }, [user]);
+  }, []);
   const toggleStatus = async (
     jobID: string,
     field: 'interview' | 'offer' | 'applied'
@@ -60,8 +69,27 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
       throw error;
     }
   };
+  const updateInterviewDate = async (jobID: string, interviewDate: Date | null) => {
+    try {
+      const { data } = await axios.patch(`http://localhost:3000/interview-date/${jobID}`, { 
+        interviewDate 
+      });
+      
+      // Update the job in local state with the new interview date
+      setJobs(prevJobs =>
+        prevJobs.map(job =>
+          job.jobID === jobID ? { ...job, interviewDate: data.interviewDate } : job
+        )
+      );
+      
+      return data;
+    } catch (error) {
+      console.error('Error updating interview date:', error);
+      throw error;
+    }
+  };
   return (
-    <JobsContext.Provider value={{ jobs, setJobs, toggleStatus }}>
+    <JobsContext.Provider value={{ jobs, setJobs, toggleStatus , updateInterviewDate}}>
       {children}
     </JobsContext.Provider>
   );

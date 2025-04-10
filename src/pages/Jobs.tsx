@@ -83,7 +83,7 @@ const handleGenerateCoverLetter = async (jobId: string) => {
         console.error('Failed to generate cover letter:', error);
     }
 };
-
+  console.log(jobs);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
     return (

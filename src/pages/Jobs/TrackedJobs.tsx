@@ -1,84 +1,105 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router';
-import { JobsContext } from '../../provider/JobsProvider';
+
+import { JobsContext, Job } from '../../provider/JobsProvider';
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
 const TrackedJobs = () => {
-  const { jobs, toggleStatus } = useContext(JobsContext);
+  const { jobs, toggleStatus, updateInterviewDate } = useContext(JobsContext);
+  console.log(jobs.length);
   const handleToggle = (job: Job, field: 'applied' | 'interview' | 'offer') => {
     toggleStatus(job.jobID, field);
   };
+  
+  const handleDateChange = (jobID: string, date: Date | null | string) => {
+    console.log("Selected date:", date); 
+    updateInterviewDate(jobID, date);
+  }
 
   return (
-    <div className="overflow-x-auto p-4">
+    <div className="overflow-x-auto p-2 md:p-4">
       <table className="min-w-full table-auto border-collapse border border-gray-200 ">
-        <thead className="text-2xl">
+        <thead>
           <tr className="bg-gray-50">
-      
-            <th className="border px-4 py-2  w-1/3 text-left">Job</th>
-            <th className="border px-4 py-2 text-center">Applied</th>
-            <th className="border px-4 py-2 text-center">Interview</th>
-            <th className="border px-4 py-2 text-center">Offer</th>
-            <th className="border px-4 py-2 text-center">Actions</th>
-            <th className="border px-4 py-2 text-center">Interview Date</th>
+            <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl text-left">Job</th>
+            <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl  text-center hidden sm:table-cell">Applied</th>
+            <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl  text-center hidden sm:table-cell">Interview</th>
+            <th className="border px-1 py-1 md:px-4 md:py-2 text-xs  md:text-2xl text-center hidden sm:table-cell">Offer</th>
+            <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl text-center">Date</th>
+            <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl text-center">Actions</th>
+     
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody className="bg-white divide-y  divide-gray-200">
           {jobs.map((job, index) => (
-            <tr key={job.jobID || index}>
-              
-              <td className="border px-4 py-2">
-                <Link to={`/dashboard/job`} state={{ job }} className="text-blue-600 text-xl hover:underline font-bold">
+            <tr key={job.jobID || index} className="hover:bg-gray-50">
+              <td className="border px-1 py-1 md:px-4 md:py-2">
+                <a href={job.url} target="_blank" state={{ job }} className="text-blue-600 text-sm md:text2xl md:text-base hover:underline font-bold">
                   {job.title}
-                </Link>
-                <div className="text-sm text-gray-500">{job.company}</div>
+                </a>
+                <div className="text-xs text-gray-500">{job.company}</div>
               </td>
 
-              {/* applied */}
-              <td className="border text-center px-2 py-2">
-              <label>
-            <input type="checkbox" className="checkbox  checkbox-success text-white"
-            checked={!!job.applied}
-            onChange={() => handleToggle(job, 'applied')} />
-          </label>
+              {/* Applied - hidden on very small screens */}
+              <td className="border text-center px-1 py-1 md:px-2 md:py-2 hidden sm:table-cell">
+                <label>
+                  <input 
+                    type="checkbox" 
+                    className="checkbox checkbox-sm md:checkbox-md checkbox-success" 
+                    checked={!!job.applied}
+                    onChange={() => handleToggle(job, 'applied')} 
+                  />
+                </label>
               </td>
-              {/* interview */}
-              <td className="border text-center px-4 py-2">
-              <label>
-            <input type="checkbox" className="checkbox text-white checkbox-success" checked={!!job.interview}
-                  onChange={() => handleToggle(job, 'interview')} />
-          </label>
+              
+              {/* Interview - hidden on very small screens */}
+              <td className="border text-center px-1 py-1 md:px-4 md:py-2 hidden sm:table-cell">
+                <label>
+                  <input 
+                    type="checkbox" 
+                    className="checkbox checkbox-sm md:checkbox-md checkbox-success" 
+                    checked={!!job.interview}
+                    onChange={() => handleToggle(job, 'interview')} 
+                  />
+                </label>
               </td>
-              {/* offer */}
-              <td className="border text-center px-4 py-2">
-              <label>
-            <input type="checkbox" className="checkbox text-white checkbox-success" checked={!!job.offer}
-                  onChange={() => handleToggle(job, 'offer')}/>
-          </label>
+              
+              {/* Offer - hidden on very small screens */}
+              <td className="border text-center px-1 py-1 md:px-4 md:py-2 hidden sm:table-cell">
+                <label>
+                  <input 
+                    type="checkbox" 
+                    className="checkbox checkbox-sm md:checkbox-md checkbox-success" 
+                    checked={!!job.offer}
+                    onChange={() => handleToggle(job, 'offer')}
+                  />
+                </label>
               </td>
-                {/* Interview Date */}
-                <td className="border text-center px-4 py-2">
+              
+              {/* Interview Date */}
+              <td className="border text-center px-1 py-1 md:px-4 md:py-2">
                 <DatePicker
                   selected={job.interviewDate ? new Date(job.interviewDate) : null}
-              
-                  dateFormat="MM/dd/yyyy"
-                  className="input input-bordered w-full max-w-xs text-center"
-                  placeholderText="Select date"
+                  onChange={(date) => handleDateChange(job.jobID, date)}
+                  dateFormat="MM/dd/yy"
+                  className="input input-xs md:input-sm w-full text-center text-xs md:text-sm"
+                  placeholderText="Select"
                   isClearable
                 />
               </td>
               
-              <td className="border px-4 py-2">
-  <div className="flex space-x-2">
-    <button className="btn btn-ghost btn-xs text-blue-600">
-      <PencilSquareIcon className="h-5 w-5" />
-    </button>
-    <button className="btn btn-ghost btn-xs text-red-600">
-      <TrashIcon className="h-5 w-5" />
-    </button>
-  </div>
-</td>
+              {/* Actions */}
+              <td className="border px-1 py-1 md:px-4 md:py-2">
+                <div className="flex space-x-1 md:space-x-2 justify-center">
+                  <button className="btn btn-ghost btn-xs p-1">
+                    <PencilSquareIcon className="h-3 w-3 md:h-4 md:w-4 text-blue-600" />
+                  </button>
+                  <button className="btn btn-ghost btn-xs p-1">
+                    <TrashIcon className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
