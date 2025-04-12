@@ -89,7 +89,7 @@ const Login = () => {
                   <div>
                     <a className="link link-hover">Forgot password?</a>
                   </div>
-                  <button type='submit' className="btn bg-blue-500 mt-4">Login</button>
+                  <button type='submit' className="btn bg-blue-500 mt-4 text-white">Login</button>
                 </fieldset>
                </form>
               </div>

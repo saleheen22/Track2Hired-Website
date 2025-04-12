@@ -9,9 +9,8 @@ export interface Job {
   company: string;
   description: string;
   title: string;
-  coverLetter: string;
+  coverLetter?: string;
   companyResearch?: string;
-  // Optionally add the status fields if not already defined:
   interview?: boolean;
   offer?: boolean;
   applied?: boolean;
@@ -24,6 +23,7 @@ interface JobsContextType {
   setJobs: React.Dispatch<React.SetStateAction<Job[]>>;
   toggleStatus: (jobID: string, field: 'interview' | 'offer' | 'applied') => Promise<void>;
   updateInterviewDate: (jobID: string, date: Date | null) => Promise<void>;
+  isLoading: boolean;
 
 
 }
@@ -32,7 +32,8 @@ export const JobsContext = createContext<JobsContextType>({
   jobs: [],
   setJobs: () => {},
   toggleStatus: async () => {},
-  updateInterviewDate: async () => {}
+  updateInterviewDate: async () => {},
+  isLoading: false
 
 
 });
@@ -40,14 +41,20 @@ export const JobsContext = createContext<JobsContextType>({
 export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useContext(AuthContext);
   const [jobs, setJobs] = useState<Job[]>([]);
-  // const queryClient = useQueryClient();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
 
 
   useEffect(() => {
     if (user?.email) {
+      setIsLoading(true);
       axios
         .get(`http://localhost:3000/jobs/${user.email}`)
-        .then((response) => setJobs(response.data))
+        .then((response) => {setJobs(response.data)
+          setIsLoading(false);
+
+        })
         .catch((error) => console.error('Failed to load jobs:', error));
     }
   }, []);
@@ -89,7 +96,7 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
   return (
-    <JobsContext.Provider value={{ jobs, setJobs, toggleStatus , updateInterviewDate}}>
+    <JobsContext.Provider value={{ jobs, setJobs, toggleStatus , updateInterviewDate, isLoading}}>
       {children}
     </JobsContext.Provider>
   );

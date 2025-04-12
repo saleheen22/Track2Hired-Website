@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-
+import Loader from '../Common/Loader';
 import { JobsContext, Job } from '../../provider/JobsProvider';
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const TrackedJobs = () => {
-  const { jobs, toggleStatus, updateInterviewDate } = useContext(JobsContext);
+  const { jobs, toggleStatus, updateInterviewDate, isLoading } = useContext(JobsContext);
   console.log(jobs.length);
   const handleToggle = (job: Job, field: 'applied' | 'interview' | 'offer') => {
     toggleStatus(job.jobID, field);
@@ -16,7 +16,11 @@ const TrackedJobs = () => {
     console.log("Selected date:", date); 
     updateInterviewDate(jobID, date);
   }
-
+  if(isLoading){
+    return (
+      <Loader />
+    )
+  }
   return (
     <div className="overflow-x-auto p-2 md:p-4">
       <table className="min-w-full table-auto border-collapse border border-gray-200 ">

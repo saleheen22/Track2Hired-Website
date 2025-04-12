@@ -6,32 +6,7 @@ import { AuthContext } from '../provider/AuthProvider';
 const CopyableText = () => {
     const {user} = useContext(AuthContext);
   const textToCopy  : string= `
-[Your Name]
-[Your Address]
-[Your Phone Number]
-[Your Email Address]
-
-[Date]
-
-Hiring Manager
-[Restaurant Name/Company Name - If known, otherwise omit]
-[Restaurant/Company Address - If known, otherwise omit]
-
-**Subject: Application for Line Cook Position**
-
-Dear Hiring Manager,
-
-I am writing to express my strong interest in the Line Cook position advertised recently. With my experience in fast-paced kitchen environments and a genuine passion for food preparation and culinary arts, I am confident that I possess the skills and dedication necessary to be a valuable asset to your team.
-
-Throughout my previous experience, I have developed proficiency in various cooking techniques, efficient station management, and maintaining impeccable standards of cleanliness and food safety. I am adept at working collaboratively with kitchen staff under pressure, ensuring orders are prepared accurately, consistently, and in a timely manner to meet service demands. My focus is always on contributing to a smooth kitchen operation and delivering high-quality dishes.
-
-I am particularly drawn to this opportunity [mention the restaurant name here if known, otherwise omit this specific phrase] and am seeking a position where I can apply my skills within a professional and supportive environment. The mention of great benefits further reinforces my interest, suggesting a company culture that values its employees and encourages long-term commitment.
-
-Thank you for considering my application. My resume provides further detail on my qualifications and work history. I am eager to learn more about this role and discuss how my abilities align with your needs. I look forward to the possibility of an interview at your convenience.
-
-Sincerely,
-
-[Your Typed Name].`;
+[`;
 
   const [copyStatus, setCopyStatus] = useState('');
 

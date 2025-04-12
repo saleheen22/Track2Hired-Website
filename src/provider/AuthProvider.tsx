@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
-
+import axios from 'axios';
 import app from '../FirebaseAuth/firebase.config';
 import { ReactNode } from 'react';
-import { getAuth, Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut,GoogleAuthProvider, signInWithPopup,  updateProfile  } from "firebase/auth";
+import { getAuth, Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut,GoogleAuthProvider, signInWithPopup,  updateProfile , getAdditionalUserInfo } from "firebase/auth";
 import { RegisterFormValues } from '../utils/Types/registerType';
 import { AuthContextType } from '../utils/Types/AutContextType';
 
@@ -26,17 +26,23 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         await updateProfile(result.user, {
           displayName: displayName,
         });
-        setUser({
+        const userData = {
           email,
           firstName,
           lastName,
           displayName: displayName
-  
-        });
-        return {
-          success: true,
-          message: "User created successfully"
-        };
+        }
+        try {
+          await axios.post('http://localhost:3000/create-user', userData);
+          setUser(userData);
+          return {
+            success: true,
+            message: "User created successfully"
+          };
+        } catch (dbError) {
+          console.error('Failed to create user in database:', dbError);
+        }
+       
       }
       return {
         success: false,
@@ -87,34 +93,39 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signInWithGoogle = async () => {
     try {
       return await signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
-        // The signed-in user info.
-        
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
+        const isNewUser = getAdditionalUserInfo(result)?.isNewUser;
         if (result.user) {
           const [firstName, lastName] = (result.user.displayName || '').split(' ');
-          setUser({
+          const userData = {
             email: result.user.email || '',
             firstName,
             lastName,
             displayName: result.user.displayName || '',
             
-          });
+          }
+          setUser(userData);
+          if (isNewUser) {
+            // Call your create-user API
+            try {
+              await axios.post('http://localhost:3000/create-user', userData);
+              console.log('User record created in database');
+            } catch (error) {
+              console.error('Failed to create user record:', error);
+            }
+          }
         }
         
       }).catch((error) => {
         // Handle Errors here.
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorCode);
+        console.log(error.message);
+        GoogleAuthProvider.credentialFromError(error);
         // ...
       });
    

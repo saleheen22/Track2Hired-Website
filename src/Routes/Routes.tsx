@@ -14,7 +14,9 @@ import Jobs from '../pages/Jobs';
 import Job from '../pages/Jobs/Job';
 import JobTable from '../pages/Jobs/JobApplication';
 import TrackedJobs from '../pages/Jobs/TrackedJobs';
-import Resume from '../pages/Resume'
+import Resume from '../pages/Resume';
+import CoverLetters from '../pages/CoverLetters/CoverLetters'
+import SingleCoverLetter from '../pages/CoverLetters/SingleCoverLetter';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -48,6 +50,13 @@ export const router = createBrowserRouter([
     },{
       path: 'resume',
       Component: Resume
+    },
+    {path: 'cover-letters',
+      Component: CoverLetters
+    },
+    {
+      path: 'cover-letter/:jobID',
+      Component: SingleCoverLetter
     }
   ]
   }
