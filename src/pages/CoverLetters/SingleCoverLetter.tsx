@@ -120,7 +120,7 @@ const SingleCoverLetter = () => {
                     <p className="text-gray-600 mb-4">No cover letter has been created for this job yet.</p>
                     <button 
                         onClick={generateCoverLetter}
-                        className="btn btn-primary"
+                        className="btn bg-blue-500"
                         disabled={isGenerating}
                     >
                         {isGenerating ? (
@@ -129,15 +129,14 @@ const SingleCoverLetter = () => {
                                 Generating...
                             </>
                         ) : (
-                            <div className="mt-6">
-                            <button 
-                                className="btn bg-blue-500"
-                                onClick={() => window.history.back()}
-                            >
+                            <>
+                            
+                          
                                 <SparklesIcon className="h-5 w-5 mr-2" />
-                                Go Back to Cover Letters
-                            </button>
-                        </div>
+                                Generate Cover Letter
+                                </>
+                          
+                        
                         )}
                     </button>
                 </div>
