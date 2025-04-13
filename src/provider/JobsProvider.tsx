@@ -44,20 +44,27 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const fetchJobs = async () => {
+    if (!user?.email) return;
+    
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`http://localhost:3000/jobs/${user.email}`);
+      setJobs(response.data);
+    } catch (error) {
+      console.error('Failed to load jobs:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
 
   useEffect(() => {
-    if (user?.email) {
-      setIsLoading(true);
-      axios
-        .get(`http://localhost:3000/jobs/${user.email}`)
-        .then((response) => {setJobs(response.data)
-          setIsLoading(false);
-
-        })
-        .catch((error) => console.error('Failed to load jobs:', error));
-    }
-  }, []);
+    fetchJobs();
+  }, [user]);
+  const refetchJobs = async () => {
+    await fetchJobs();
+  };
   const toggleStatus = async (
     jobID: string,
     field: 'interview' | 'offer' | 'applied'
@@ -96,7 +103,7 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
   return (
-    <JobsContext.Provider value={{ jobs, setJobs, toggleStatus , updateInterviewDate, isLoading}}>
+    <JobsContext.Provider value={{ jobs, setJobs, toggleStatus , updateInterviewDate, isLoading, refetchJobs}}>
       {children}
     </JobsContext.Provider>
   );

@@ -1,4 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import Loader from '../Common/Loader';
+
 import { 
   ClipboardDocumentIcon, 
   ArrowDownTrayIcon,
@@ -6,34 +8,45 @@ import {
 } from '@heroicons/react/24/outline';
 import { JobsContext } from '../../provider/JobsProvider';
 import { useParams} from 'react-router';
+import axios from 'axios';
 
 
 const SingleCoverLetter = () => {
-    const { jobs } = useContext(JobsContext);
-    const { jobID } = useParams<{ jobId: string }>();
+    
+
+    const { jobs, refetchJobs } = useContext(JobsContext);
+
+    const { jobID } = useParams<{ jobID: string }>();
     const [copyStatus, setCopyStatus] = useState('');
+   
     const [isGenerating, setIsGenerating] = useState(false);
     
     // Get the job associated with this ID
     console.log(jobID);
     const job = jobs.find(j => j.jobID === jobID);
+    const [coverLetter, setCoverLetter] = useState(job?.coverLetter || null);
     
+    useEffect(() => {
+        const currentJob = jobs.find(j => j.jobID === jobID);
+        if (currentJob?.coverLetter) {
+            setCoverLetter(currentJob.coverLetter);
+        }
+    }, [jobs, jobID]);
     // Function to generate cover letter
     const generateCoverLetter = async () => {
         setIsGenerating(true);
         
         try {
-            // Here you would implement your generation logic
-            // For example:
-            // const response = await axios.post('...');
-            // Then update the job with the new cover letter in your context or database
+         const response =  await axios.post(`http://localhost:3000/generate-cover-letter/${jobID}`);
+         refetchJobs(); 
+         const coverLetter = response.data.coverLetter;
+         console.log("This is response", response.data);
+         console.log("Cover letter", coverLetter);
+         setCoverLetter(coverLetter);
+        
             
-            console.log(`Generating cover letter for job: ${jobId}`);
+           
             
-            // Simulate delay for demo purposes
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            // This is where you would update the job with the new cover letter
             
         } catch (err) {
             console.error('Error generating cover letter:', err);
@@ -43,18 +56,18 @@ const SingleCoverLetter = () => {
     };
     
     const copyToClipboard = () => {
-        if (!job?.coverLetter) return;
+        if (!coverLetter) return;
         
-        navigator.clipboard.writeText(job.coverLetter);
+        navigator.clipboard.writeText(coverLetter);
         setCopyStatus('Copied to clipboard!');
         setTimeout(() => setCopyStatus(''), 2000);
     };
     
     const downloadDocFile = () => {
-        if (!job?.coverLetter) return;
+        if (!coverLetter) return;
         
         // Create blob with cover letter content
-        const blob = new Blob([job.coverLetter], { type: 'application/msword' });
+        const blob = new Blob([coverLetter], { type: 'application/msword' });
         const url = URL.createObjectURL(blob);
         
         // Create download link and click it
@@ -72,37 +85,7 @@ const SingleCoverLetter = () => {
     // If job not found
     if (!job) {
         return (
-            <div className="flex items-center justify-center h-[70vh] px-4">
-                <div className="text-center max-w-md">
-                    <svg 
-                        className="mx-auto h-12 w-12 text-gray-400" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor" 
-                        aria-hidden="true"
-                    >
-                        <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth="2" 
-                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
-                        />
-                    </svg>
-                    <h2 className="mt-4 text-lg font-medium text-gray-900">Job not found</h2>
-                    <p className="mt-2 text-sm text-gray-500">
-                        We couldn't find this job. It may have been deleted or the URL might be incorrect.
-                    </p>
-                    <div className="mt-6">
-                        <button 
-                            className="btn bg-blue-500"
-                            onClick={() => window.history.back()}
-                        >
-                            <SparklesIcon className="h-5 w-5 mr-2" />
-                            Go Back to Cover Letters
-                        </button>
-                    </div>
-                </div>
-            </div>
+          <Loader message = "Loading cover letter" />
         );
     }
     
@@ -115,7 +98,7 @@ const SingleCoverLetter = () => {
             </div>
             
             {/* If there's no cover letter yet, show the generate button */}
-            {!job.coverLetter ? (
+            {!coverLetter ? (
                 <div className="bg-gray-50 p-8 rounded-lg border border-gray-200 text-center">
                     <p className="text-gray-600 mb-4">No cover letter has been created for this job yet.</p>
                     <button 
@@ -132,7 +115,7 @@ const SingleCoverLetter = () => {
                             <>
                             
                           
-                                <SparklesIcon className="h-5 w-5 mr-2" />
+                                <SparklesIcon className="h-5 w-5 mr-2"  onClick={ generateCoverLetter}/>
                                 Generate Cover Letter
                                 </>
                           
@@ -144,7 +127,7 @@ const SingleCoverLetter = () => {
                 <>
                     {/* Display the cover letter content */}
                     <pre className="bg-gray-50 p-6 rounded-lg border border-gray-200 whitespace-pre-wrap">
-                        {job.coverLetter}
+                        {coverLetter}
                     </pre>
 
                     {/* Actions container */}
@@ -173,7 +156,7 @@ const SingleCoverLetter = () => {
                             className="btn bg-blue-500 btn-sm flex items-center gap-2"
                             disabled={isGenerating}
                         >
-                            <SparklesIcon className="h-4 w-4" />
+                            <SparklesIcon onClick= {generateCoverLetter}className="h-4 w-4" />
                             {isGenerating ? 'Generating...' : 'Regenerate'}
                         </button>
 
