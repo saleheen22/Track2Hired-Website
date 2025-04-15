@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Sidebar = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
  
   const navItems = [
     { label: "Dashboard", path: "/dashboard" },
     { label: "Jobs", path: "/dashboard/jobs" },
     { label: "Cover Letters", path: "/dashboard/cover-letters" },
     { label: "Resume", path: "/dashboard/resume" },
+    { label: "Company Research", path: "/dashboard/company-research" },
     
-    { label: "Support", path: "/dashboard/support" },
   ];
   const [isOpen, setOpen] = useState<boolean>(false);
   const toggleMenu = () => setOpen(!isOpen);
-
+  // Function to determine if a nav item is active
+  const isActive = (path: string) => {
+    if (path === "/dashboard") {
+      // For dashboard, only highlight when exactly at /dashboard
+      return currentPath === path;
+    }
+    // For other items, match if the current path starts with the item path
+    return currentPath.startsWith(path);
+  };
   return (
     <>
       {/* Mobile Hamburger Button */}
@@ -42,7 +52,11 @@ const Sidebar = () => {
             <li key={item.path}>
               <Link 
                 to={item.path} 
-                className="block px-4 py-2 rounded hover:bg-gray-200 transition-colors"
+                className={`block px-4 py-2 rounded transition-colors ${
+                  isActive(item.path) 
+                    ? "bg-blue-500 text-white font-medium" 
+                    : "hover:bg-gray-200"
+                }`}
                 onClick={() => setIsOpen(false)} // close on link click in mobile
               >
                 {item.label}
