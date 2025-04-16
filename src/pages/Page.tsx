@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
-import CopyableText from './CopyToClipBoard';
+
 
 const Page = () => {
   const {user, logOut} = useContext(AuthContext);
@@ -14,7 +14,7 @@ const Page = () => {
         <h1 className="text-3xl italic font-bold underline">Hello world!</h1>
         <button className="btn btn-success">Success</button>
       </div>
-      <CopyableText />
+    
     </div>
   );
 };

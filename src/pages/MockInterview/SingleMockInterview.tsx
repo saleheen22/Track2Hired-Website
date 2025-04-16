@@ -172,7 +172,7 @@ const SingleMockInterview = () => {
   }
 
   return (
-    <div className="p-5 max-w-4xl mx-auto">
+    <div className="p-5 max-w-7xl mx-auto">
       {/* Job details header */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold">{job.title}</h2>

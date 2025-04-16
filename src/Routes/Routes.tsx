@@ -10,9 +10,8 @@ import Register from '../pages/Register';
 import PrivateRoute from './PrivateRoute';
 
 import Dashboard from '../Layouts/Dashboard';
-import Jobs from '../pages/Jobs';
-import Job from '../pages/Jobs/Job';
-import JobTable from '../pages/Jobs/JobApplication';
+
+
 import TrackedJobs from '../pages/Jobs/TrackedJobs';
 import Resume from '../pages/Resume';
 import CoverLetters from '../pages/CoverLetters/CoverLetters'
@@ -21,6 +20,7 @@ import SingleCompany from '../pages/CompanyResearch/SingleCompany';
 import Companies from '../pages/CompanyResearch/Companies';
 import MockIntJobs from '../pages/MockInterview/MockIntJobs';
 import SingleMockInterview from '../pages/MockInterview/SingleMockInterview';
+import JobDashboard from '../pages/Jobs/JobDashboard';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -39,15 +39,12 @@ export const router = createBrowserRouter([
   {path: '/register',
     Component: Register
   },
-  {
-    path: '/seejobs',
-    Component: JobTable,
-  },
+
   {path: '/dashboard',
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [{
       path: '',
-      Component: Jobs
+      Component: JobDashboard
     },{
       path: 'jobs',
       Component: TrackedJobs
