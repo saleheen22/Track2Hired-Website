@@ -85,7 +85,7 @@ const SingleCompany = () => {
     // If job not found
     if (!job) {
         return (
-          <Loader message = "Loading cover letter" />
+          <Loader message = "Loading Company Info" />
         );
     }
     
@@ -116,7 +116,7 @@ const SingleCompany = () => {
                             
                           
                                 <SparklesIcon className="h-5 w-5 mr-2"  onClick={ generateCompanySearch}/>
-                                Generate Cover Letter
+                                Generate Company Research
                                 </>
                           
                         

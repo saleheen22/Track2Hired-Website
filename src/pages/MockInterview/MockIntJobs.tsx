@@ -1,21 +1,17 @@
+
 import React, {  useContext } from 'react';
 import {Link} from 'react-router';
 import { JobsContext } from '../../provider/JobsProvider';
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
-import Loader from '../Common/Loader';
-const CoverLetters = () => {
-    const {jobs, isLoading} = useContext(JobsContext);
-    if(isLoading){
-      return (
-        <Loader />
-      )
-    }
+
+const MockIntJobs = () => {
+    const {jobs} = useContext(JobsContext)
     return (
         <div className="overflow-x-auto p-2 md:p-4">
       <table className="min-w-full table-auto border-collapse border border-gray-200 ">
         <thead>
           <tr className="bg-gray-50">
-            <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl text-left">Cover Letters</th>
+            <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl text-left">Jobs </th>
             <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl text-center">Actions</th>
           </tr>
       
@@ -25,7 +21,7 @@ const CoverLetters = () => {
             <tr key={job.jobID || index} className="hover:bg-gray-50">
               <td className="border px-1 py-1 md:px-4 md:py-2">
               <Link 
-                      to={`/dashboard/cover-letter/${job.jobID}`}
+                      to={`/dashboard/mock-interviews/${job.jobID}`}
                       className="text-blue-600 text-sm md:text-base hover:underline font-bold"
                     >
                       {job.title}
@@ -53,4 +49,4 @@ const CoverLetters = () => {
     );
 };
 
-export default CoverLetters;
+export default MockIntJobs;

@@ -17,8 +17,10 @@ import TrackedJobs from '../pages/Jobs/TrackedJobs';
 import Resume from '../pages/Resume';
 import CoverLetters from '../pages/CoverLetters/CoverLetters'
 import SingleCoverLetter from '../pages/CoverLetters/SingleCoverLetter';
-import SingleCompany from '../pages/CompanyResearch/SingleCompany'
-import Companies from '../pages/CompanyResearch/Companies'
+import SingleCompany from '../pages/CompanyResearch/SingleCompany';
+import Companies from '../pages/CompanyResearch/Companies';
+import MockIntJobs from '../pages/MockInterview/MockIntJobs';
+import SingleMockInterview from '../pages/MockInterview/SingleMockInterview';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -67,6 +69,12 @@ export const router = createBrowserRouter([
     {
       path: 'company-research/:jobID',
       Component: SingleCompany
+    },
+    {path: 'mock-interviews',
+    Component: MockIntJobs
+    },
+    {path: 'mock-interviews/:jobID',
+      Component: SingleMockInterview
     }
 
   ]
