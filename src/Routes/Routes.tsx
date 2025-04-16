@@ -21,6 +21,8 @@ import Companies from '../pages/CompanyResearch/Companies';
 import MockIntJobs from '../pages/MockInterview/MockIntJobs';
 import SingleMockInterview from '../pages/MockInterview/SingleMockInterview';
 import JobDashboard from '../pages/Jobs/JobDashboard';
+import ColdEmailsJob from '../pages/ColdEmail/ColdEmailsJob';
+import SingleColdEmail from '../pages/ColdEmail/SingleColdEmail';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -72,7 +74,13 @@ export const router = createBrowserRouter([
     },
     {path: 'mock-interviews/:jobID',
       Component: SingleMockInterview
-    }
+    },
+    {path: 'cold-email',
+      Component: ColdEmailsJob
+    },
+    {path: 'cold-email/:jobID',
+      Component: SingleColdEmail
+    },
 
   ]
   }

@@ -10,9 +10,11 @@ const Sidebar = () => {
     { label: "Dashboard", path: "/dashboard" },
     { label: "Jobs", path: "/dashboard/jobs" },
     { label: "Cover Letters", path: "/dashboard/cover-letters" },
-    { label: "Resume", path: "/dashboard/resume" },
     { label: "Company Research", path: "/dashboard/company-research" },
     {label: "Mock Interviews", path: "/dashboard/mock-interviews"},
+    {label: "Cold Emails", path: "/dashboard/cold-email"},
+    { label: "Resume", path: "/dashboard/resume" },
+    
     
   ];
   const [isOpen, setOpen] = useState<boolean>(false);
