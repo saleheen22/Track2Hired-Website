@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import logo from '../../assets/logo_white.png';
 import { AuthContext } from '../../provider/AuthProvider';
+import { Link } from 'react-router';
 
 const DashboardNav = () => {
 
@@ -14,16 +15,20 @@ const DashboardNav = () => {
       
  <div className="relative flex justify-between items-center p-4 m-0">
       {/* Left side (Logo or brand) */}
-      <div className="logo px-2 pl-12 cursor-pointer flex justify-between " > 
+    <Link to= "/">
+    <div className="logo px-2 pl-12 cursor-pointer flex justify-between " > 
    
-        <img
-        src={logo}
-        alt="Track2Hired Logo"
-        className="sm:h-9  h-12 w-auto mr-2 object-contain"
-      />
-      <h1 className="flex justify-center text-center text-bold my-auto text-3xl font-bold
- ">Track2Hired</h1>
-      </div>
+   
+   <img
+      src={logo}
+      alt="Track2Hired Logo"
+      className="sm:h-9  h-12 w-auto mr-2 object-contain"
+    />
+   
+    <h1 className="flex justify-center text-center text-bold my-auto text-3xl font-bold
+">Track2Hired</h1>
+    </div>
+    </Link>
     
       <p>{user?.displayName}</p>
 

@@ -12,8 +12,9 @@ const Login = () => {
     const [passOn, setPassON] = useState<boolean>(false);
     const {signInNewUser,  signInWithGoogle} = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}} = useForm<LoginFormValues>();
-    const handleGoogleSignIn = () => {
-      signInWithGoogle().then(() => navigate('/dashboard'));
+    const handleGoogleSignIn = async() => {
+     await signInWithGoogle();
+       navigate('/dashboard');
       
     }
     const onSubmit = (data: LoginFormValues) => {

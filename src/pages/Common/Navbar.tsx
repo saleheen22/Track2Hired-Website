@@ -53,7 +53,7 @@ const Navbar = () => {
     ) : (
       <p>
         <Link to="/dashboard">
-          <button className="btn btn-accent">Go to Dashboard</button>
+          <button className="btn bg-blue-500 text-white">Go to Dashboard</button>
         </Link>
       </p>
     )

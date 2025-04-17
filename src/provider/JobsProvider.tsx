@@ -49,7 +49,7 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://localhost:3000/jobs/${user.email}`);
+      const response = await axios.get(`http://localhost:3000/jobs/${user.email}`, {withCredentials: true});
       setJobs(response.data);
     } catch (error) {
       console.error('Failed to load jobs:', error);

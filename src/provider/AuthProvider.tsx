@@ -17,7 +17,17 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserProfileType>();
   const auth: Auth = getAuth(app);
 
-
+  const getJwtCookie = async (email: string) => {
+    try {
+      await axios.post(
+        'http://localhost:3000/jwt',
+        { email },
+        { withCredentials: true } // This is important!
+      );
+    } catch (error) {
+      console.error('Failed to get JWT cookie:', error);
+    }
+  };
   const createNewUser = async ({email, password, firstName, lastName}: Pick<RegisterFormValues, 'email' | 'password' |'firstName' | 'lastName'>): Promise<{ success: boolean; message: string }> => {
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -33,6 +43,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
           displayName: displayName
         }
         try {
+          await getJwtCookie(email);
           await axios.post('http://localhost:3000/create-user', userData);
           setUser(userData);
           return {
@@ -72,6 +83,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       if (result) {
+        await getJwtCookie(email);
         return {
           success: true,
           message: "User created successfully",
@@ -108,7 +120,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
             
           }
           setUser(userData);
+          await getJwtCookie(userData.email);
           if (isNewUser) {
+            
             // Call your create-user API
             try {
               await axios.post('http://localhost:3000/create-user', userData);
@@ -136,16 +150,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
   const logOut = async () => {
     try {
-      return await signOut(auth).then(() => {
-        // Sign-out successful.
-        console.log("User signed out successfully");
-      }).catch((error) => {
-        // An error happened.
-        console.error("An error occurred while signing out:", error);
-      });
-    }
-    catch (error) {
-      console.log(error);
+      await signOut(auth);
+      await axios.post('http://localhost:3000/logout', {}, { withCredentials: true });
+      console.log("User signed out successfully");
+      return { success: true, message: "User signed out successfully" };
+    } catch (error) {
+      console.error("An error occurred while signing out:", error);
+      return { success: false, message: "An error occurred while signing out" };
     }
   }
 
