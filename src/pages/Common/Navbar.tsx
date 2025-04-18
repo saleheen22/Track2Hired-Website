@@ -53,12 +53,12 @@ const Navbar = () => {
     ) : (
       <p>
         <Link to="/dashboard">
-          <button className="btn bg-blue-500 text-white">Go to Dashboard</button>
+          <button className="btn btn-boss bg-blue-500 text-white rounded text-xl font-semibold">Go to Dashboard</button>
         </Link>
       </p>
     )
   ) : (
-    <p>Please sign in</p>
+   <Link to="/login"> <button className="btn btn-boss bg-blue-500 rounded text-white text-xl font-semibold">Get Started</button></Link>
   )}
 </div>
 
