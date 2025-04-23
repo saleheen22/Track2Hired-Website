@@ -10,15 +10,33 @@ const StreamLine = () => {
           icon: "📌"
         },
         {
-          title: "AI Cover Letters",
-          description: "Generate tailored cover letters using Gemini AI.",
-          icon: "🤖"
-        },
-        {
-          title: "Track Applications",
-          description: "View all your job applications in a single dashboard.",
+          title: "Centralized Dashboard",
+          description: "View all your job applications in one place. Track status, deadlines, and follow-ups with our intuitive dashboard..",
           icon: "📊"
         },
+        {
+          title: "Application Analytics",
+          description: "Gain insights into your job search. Track response rates, interview conversions, and identify successful strategies",
+          icon: "📈"
+        },
+        {
+          title: "Customized Cover Letters & Cold Emails",
+          description: "Create tailored cover letters and cold emails in seconds. Our AI analyzes the job description and your skills to generate personalized cover letters. and cold emails",
+          icon: "✉️"
+        },
+  
+        {
+          title: "Mock Interview Questions",
+          description: "Practice with job-specific behavioral &technical interview questions. Get prepared with our AI-generated questions based on the position you are applying for",
+          icon: "🧪"
+        },
+        {
+          title: "Company Research",
+          description: "Our AI gathers and summarizes the latest company info, culture, and news—helping you ace behavioral interviews and ask standout questions.",
+
+          icon: "🏢"
+
+        }
       
       ];
     return (

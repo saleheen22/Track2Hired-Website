@@ -100,7 +100,7 @@ const SingleCompany = () => {
             {/* If there's no cover letter yet, show the generate button */}
             {!companyResearch ? (
                 <div className="bg-gray-50 p-8 rounded-lg border border-gray-200 text-center">
-                    <p className="text-gray-600 mb-4">No cover letter has been created for this job yet.</p>
+                    <p className="text-gray-600 mb-4">No Company Research has been generated for this job yet.</p>
                     <button 
                         onClick={generateCompanySearch}
                         className="btn bg-blue-500"
@@ -116,7 +116,7 @@ const SingleCompany = () => {
                             
                           
                                 <SparklesIcon className="h-5 w-5 mr-2 text-white"  onClick={ generateCompanySearch}/>
-                                Generate Company Research
+                                <span className="text-white">Generate Company Research</span>
                                 </>
                           
                         
