@@ -40,10 +40,21 @@ const Navbar = () => {
       </div>
 
       {/* Middle (Desktop links) */}
-      <div className="links hidden md:flex justify-around gap-2 sm:gap-4 md:gap-8 lg:gap-10">{menu.map((menu, idx)=> 
-        <Link className='text-xl' key= {idx} to="/">{menu}</Link>
-
-      )}</div>
+      <div className="links hidden md:flex justify-around gap-2 sm:gap-4 md:gap-8 lg:gap-10">{menu.map((menu, idx) => {
+    if (menu === "Features") {
+      return <a className="text-xl" key={idx} href="#features">{menu}</a>;
+    } else if (menu === "Extension") {
+      return <a className="text-xl" key={idx} href="#extension">{menu}</a>;
+    } else if (menu === "AI Tools") {
+      return <a className="text-xl" key={idx} href="#aitools">{menu}</a>;
+    } else if (menu === "Home") {
+      return <a className="text-xl" key={idx} href="#">{menu}</a>;
+    } else if (menu === "About Us") {
+      return <a className="text-xl" key={idx} href="#about">{menu}</a>;
+    } else {
+      return null;
+    }
+  })}</div>
 
       {/* Right (Desktop sign in) */}
       <div className="sign hidden md:block">
