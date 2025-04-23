@@ -1,20 +1,46 @@
 import React from 'react';
+import { Typewriter } from 'react-simple-typewriter';
 
 const Hero = () => {
     return (
-        <div className= "bg-gradient-to-b from-white to-blue-100 py-20 md:py-32">
+        <div className= "bg-gradient-to-b from-white to-blue-100 py-20 md:py-32 h-[55vh] flex items-center justify-center">
 
-           <div className="container mx-auto px-4 text-center flex ">
-           <div className="left" > <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-900 mb-6  ">
-            Track Your Job Applications
-            <span className="text-blue-500 block ">Effortlessly</span>
+           <div className="container mx-auto px-4 text-center ">
+         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-900 mb-6  ">
+           Supercharge Your Job Search With
+
+
+      
+<span className="text-blue-500 block">
+<Typewriter
+  words={[ 'Our One-Click Browser Extension.',
+        'Effortless Job Tracking.',
+        'Personalized Cover Letters.',
+        'Personalized Cold Emails.',
+        'Company Research Powered by AI.',
+        'Smart Interview Scheduling.',
+        'All in One Platform.']}
+  loop={0}
+  cursor
+  cursorStyle='_'
+  typeSpeed={120}
+  deleteSpeed={80}
+  delaySpeed={1200}
+  
+/>
+</span>
             </h1>
+            <p className="text-lg md:text-2xl text-slate-600 mb-8">Never lose track of your job applications again. Track2Hired helps you organize your job search with our browser extension and AI-powered tools to increase your chances of getting hired</p>
+         
+            <div className=" flex flex-col sm:flex-row  justify-center gap-10    ">
+                <button className="btn bg-blue-500  text-white text-lg sm:text-xl text-center sm:p-6 rounded-xl">Get The Extension</button >
+                <button className="btn bg-white text-center border-2 border-blue-500 text-blue-500 sm:p-6 text-lg sm:text-xl rounded-xl">Learn More</button>
+
             </div>
-           <div className="right">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum eius amet nam enim facere, harum architecto incidunt ipsa magnam quidem?</p>
-           </div>
+         
             </div>
-        </div>
+            </div>
+        
     );
 };
 
