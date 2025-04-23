@@ -30,7 +30,7 @@ const Hero = () => {
 />
 </span>
             </h1>
-            <p className="text-lg md:text-xl xl:text-2xl text-slate-600 mb-8">Never lose track of your job applications again. Track2Hired helps you organize your job search with our browser extension and AI-powered tools to increase your chances of getting hired</p>
+            <p className="text-lg md:text-xl xl:text-2xl text-slate-600 mb-8 ">Never lose track of your job applications again. Track2Hired helps you organize your job search with our browser extension and AI-powered tools to increase your chances of getting hired</p>
          
             <div className=" flex  justify-center gap-10    ">
                 <button className="btn bg-blue-500  text-white  xl:text-xl text-center sm:p-6 md:text-lg rounded-xl w-1/3 md:w-auto">Get The Extension</button >
