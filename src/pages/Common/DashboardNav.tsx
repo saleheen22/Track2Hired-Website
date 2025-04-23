@@ -49,7 +49,7 @@ const handleLogout = async () => {
       {user && (
           <div className="relative" ref={dropdownRef}>
             <button
-              className="flex items-center gap-2 px-4 py-2 rounded bg-blue-900 hover:bg-base-200 hover:text-black transition"
+              className="flex items-center gap-2 px-4 py-2 rounded bg-slate-100  text-black transition"
               onClick={() => setOpen((prev) => !prev)}
             >
               <span className="font-semibold">{user.displayName}</span>
@@ -58,10 +58,10 @@ const handleLogout = async () => {
               </svg>
             </button>
             {open && (
-              <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-lg z-50">
+              <div className="absolute right-0 mt-2 w-40 bg-slate-100 text-black rounded shadow-lg z-50">
                 <div className="px-4 py-2 border-b font-medium">{user.displayName}</div>
                 <button
-                  className="w-full text-left px-4 py-2 hover:bg-blue-100"
+                  className="w-full text-left px-4 py-2 btn bg-blue-500 text-white"
                   onClick={handleLogout}
                 >
                   Logout

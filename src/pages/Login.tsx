@@ -6,21 +6,26 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { LoginFormValues } from '../utils/Types/loginType';
 import { AuthContext } from '../provider/AuthProvider';
 import { useNavigate } from 'react-router';
-
+import Loader from './Common/Loader'
 const Login = () => {
   const navigate = useNavigate();
     const [passOn, setPassON] = useState<boolean>(false);
     const {signInNewUser,  signInWithGoogle} = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm<LoginFormValues>();
     const handleGoogleSignIn = async() => {
+      setLoading(true);
      await signInWithGoogle();
+     setLoading(false);
        navigate('/dashboard');
       
     }
     const onSubmit = (data: LoginFormValues) => {
+      setLoading(true);
         signInNewUser(data).then((userCredential) => {
           // Signed in 
           if (userCredential ) {
+            setLoading(false);
             navigate('/dashboard');
           // ...
           }
@@ -29,10 +34,15 @@ const Login = () => {
           
         })
         .catch((error) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const errorCode = error.code;
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const errorMessage = error.message;
         });
     };
+    if (loading) {
+      return <Loader message="Logging you in..." />;
+    }
   return (
     <div className='bg-base-200'>
       <h1>This is login page</h1>

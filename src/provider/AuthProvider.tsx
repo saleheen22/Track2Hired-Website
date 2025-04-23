@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import app from '../FirebaseAuth/firebase.config';
