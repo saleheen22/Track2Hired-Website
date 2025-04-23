@@ -40,7 +40,7 @@ const Navbar = () => {
       </div>
 
       {/* Middle (Desktop links) */}
-      <div className="links hidden md:flex justify-around gap-2 sm:gap-4 md:gap-8 lg:gap-10">{menu.map((menu, idx) => {
+      <div className="links hidden xl:flex justify-around gap-2 sm:gap-4 md:gap-8 lg:gap-10">{menu.map((menu, idx) => {
     if (menu === "Features") {
       return <a className="text-xl" key={idx} href="#features">{menu}</a>;
     } else if (menu === "Extension") {
@@ -57,7 +57,7 @@ const Navbar = () => {
   })}</div>
 
       {/* Right (Desktop sign in) */}
-      <div className="sign hidden md:block">
+      <div className="sign hidden xl:block">
   {user ? (
     location.pathname.includes('/dashboard') ? (
       <p>{user.displayName}</p>
@@ -76,7 +76,7 @@ const Navbar = () => {
       {/* Hamburger / Close button (Mobile only) */}
       <div
         onClick={toggleMenu}
-        className="hamburger block md:hidden cursor-pointer bg-gray-100 px-2 py-1 rounded"
+        className="hamburger block xl:hidden cursor-pointer bg-gray-100 px-2 py-1 rounded"
       >
         {isOpen ? <XMarkIcon className="h-8 w-8 text-gray-700"/>:<Bars3Icon className="h-8 w-8 text-gray-700" />
         }
@@ -95,10 +95,21 @@ const Navbar = () => {
       `}
       >
         <div className="p-4 bg-base-300">
-        {menu.map((menu, idx)=> 
-        <h3 className="py-4 mx-4"><Link className='text-xl' key= {idx} to="/">{menu}</Link></h3>
-          
-      )}
+        {menu.map((menu, idx) => {
+    if (menu === "Features") {
+      return <a className="py-2 text-lg block" key={idx} href="#features">{menu}</a>;
+    } else if (menu === "Extension") {
+      return <a className="text-lg py-2  block" key={idx} href="#extension">{menu}</a>;
+    } else if (menu === "AI Tools") {
+      return <a className="text-lg py-2   block" key={idx} href="#aitools">{menu}</a>;
+    } else if (menu === "Home") {
+      return <a className="text-lg py-2 block" key={idx} href="#">{menu}</a>;
+    } else if (menu === "About Us") {
+      return <a className="text-lg py-2 block" key={idx} href="#about">{menu}</a>;
+    } else {
+      return null;
+    }
+  })}
           {/* Show dashboard or login button below menu */}
 
           <div className="mt-4 flex justify-center">
@@ -107,7 +118,7 @@ const Navbar = () => {
           <span className="font-semibold">{user.displayName}</span>
         ) : (
           <Link to="/dashboard">
-            <button className="btn btn-boss bg-blue-500 text-white rounded text-xl font-semibold w-full">
+            <button className="btn btn-boss bg-blue-500 text-white rounded text-lg font-semibold w-full">
               Go to Dashboard
             </button>
           </Link>
