@@ -3,7 +3,7 @@ const CoverLetters = () => {
   return (
     <JobTable
       title="Cover Letters" 
-      linkPathPrefix="/dashboard/cover-letter/"
+      linkPathPrefix="/dashboard/cover-letters/"
       onEdit={(jobID) => {
         console.log(`Edit job ${jobID}`);
         

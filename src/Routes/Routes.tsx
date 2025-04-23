@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
       Component: CoverLetters
     },
     {
-      path: 'cover-letter/:jobID',
+      path: 'cover-letters/:jobID',
       Component: SingleCoverLetter
     },
     {

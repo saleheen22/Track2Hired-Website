@@ -115,8 +115,8 @@ const SingleCoverLetter = () => {
                             <>
                             
                           
-                                <SparklesIcon className="h-5 w-5 mr-2"  onClick={ generateCoverLetter}/>
-                                Generate Cover Letter
+                                <SparklesIcon className="h-5 w-5 mr-2 text-white"  onClick={ generateCoverLetter}/>
+                                <span className="text-white">Generate Cover Letter</span>
                                 </>
                           
                         
@@ -156,8 +156,8 @@ const SingleCoverLetter = () => {
                             className="btn bg-blue-500 btn-sm flex items-center gap-2"
                             disabled={isGenerating}
                         >
-                            <SparklesIcon onClick= {generateCoverLetter}className="h-4 w-4" />
-                            {isGenerating ? 'Generating...' : 'Regenerate'}
+                            <SparklesIcon onClick= {generateCoverLetter}className="h-4 w-4 text-white" />
+                            <span className="text-white">{isGenerating ? 'Generating...' : 'Regenerate'}</span>
                         </button>
 
                         {/* Display the copy status if available */}
