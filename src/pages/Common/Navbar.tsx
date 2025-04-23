@@ -33,9 +33,9 @@ const Navbar = () => {
         <img
         src={logo}
         alt="Track2Hired Logo"
-        className="md:h-9 h-12 w-auto mr-2 object-contain"
+        className="h-6 sm:h-9 md:h-12 w-auto mr-2 object-contain"
       />
-      <h1 className="flex justify-center text-center text-bold my-auto text-3xl font-bold text-blue-600
+      <h1 className="flex justify-center text-center text-bold my-auto  text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600
  ">Track2Hired</h1>
       </div>
 
@@ -97,8 +97,29 @@ const Navbar = () => {
         <div className="p-4 bg-base-300">
         {menu.map((menu, idx)=> 
         <h3 className="py-4 mx-4"><Link className='text-xl' key= {idx} to="/">{menu}</Link></h3>
-
+          
       )}
+          {/* Show dashboard or login button below menu */}
+
+          <div className="mt-4 flex justify-center">
+      {user ? (
+        location.pathname.includes('/dashboard') ? (
+          <span className="font-semibold">{user.displayName}</span>
+        ) : (
+          <Link to="/dashboard">
+            <button className="btn btn-boss bg-blue-500 text-white rounded text-xl font-semibold w-full">
+              Go to Dashboard
+            </button>
+          </Link>
+        )
+      ) : (
+        <Link to="/login">
+          <button className="btn btn-boss bg-blue-500 rounded text-white text-xl font-semibold w-full">
+            Get Started
+          </button>
+        </Link>
+      )}
+    </div>
         </div>
       </div>
     </div>
