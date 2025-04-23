@@ -128,11 +128,11 @@ const SingleMockInterview = () => {
         <div className="space-y-8">
           {/* Behavioral section */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4 text-blue-700">Behavioral Questions</h3>
+            <h3 className="text-xl  md:text-2xl font-semibold mb-4 text-blue-700">Behavioral Questions</h3>
             <div className="space-y-6">
               {interviewData.behavioralQuestions.map((question, idx) => (
                 <div key={question.id} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                  <p className="font-medium mb-3">
+                  <p className="font-medium text-lg md:text-xl mb-3">
                     {idx + 1}. {question.question}
                   </p>
            
@@ -143,11 +143,11 @@ const SingleMockInterview = () => {
 
           {/* Technical section */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4 text-green-700">Technical Questions</h3>
+            <h3 className="text-xl  md:text-2xl font-semibold mb-4 text-green-700">Technical Questions</h3>
             <div className="space-y-6">
               {interviewData.technicalQuestions.map((question, idx) => (
                 <div key={question.id} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                  <p className="font-medium mb-3">
+                  <p className="font-medium text-lg md:text-xl mb-3">
                     {idx + 1}. {question.question}
                   </p>
                   <div className="pl-5 space-y-2">

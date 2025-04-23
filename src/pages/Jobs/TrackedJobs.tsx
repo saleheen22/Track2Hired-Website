@@ -26,6 +26,8 @@ const TrackedJobs = () => {
       <table className="min-w-full table-auto border-collapse border border-gray-200 ">
         <thead>
           <tr className="bg-gray-50">
+          <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl text-center">#</th>
+
             <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl text-left">Job</th>
             <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl  text-center hidden sm:table-cell">Applied</th>
             <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-2xl  text-center hidden sm:table-cell">Interview</th>
@@ -38,6 +40,8 @@ const TrackedJobs = () => {
         <tbody className="bg-white divide-y  divide-gray-200">
           {jobs.map((job, index) => (
             <tr key={job.jobID || index} className="hover:bg-gray-50">
+                          <td className="border px-1 py-1 md:px-4 md:py-2 text-center font-semibold">{index + 1}</td>
+
               <td className="border px-1 py-1 md:px-4 md:py-2">
                 <a href={job.url} target="_blank" state={{ job }} className="text-blue-600 text-sm md:text2xl md:text-base hover:underline font-bold">
                   {job.title}

@@ -41,8 +41,9 @@ const JobTable: React.FC<JobTableProps> = ({
   return (
     <div className="overflow-x-auto p-2 md:p-4">
       <table className="min-w-full table-auto border-collapse border border-gray-200">
-        <thead>
+        <thead className="text-lg md:text-xl">
           <tr className="bg-gray-50">
+          <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-lg text-center font-bold">#</th>
             <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-lg text-left">{title}</th>
             {showActions && (
               <th className="border px-1 py-1 md:px-4 md:py-2 text-xs md:text-lg text-center">Actions</th>
@@ -52,10 +53,11 @@ const JobTable: React.FC<JobTableProps> = ({
         <tbody className="bg-white divide-y divide-gray-200">
           {validJobs.map((job, index) => (
             <tr key={job.jobID || index} className="hover:bg-gray-50">
-              <td className="border px-1 py-1 md:px-4 md:py-2">
+               <td className="border px-1 py-1 md:px-4 md:py-2 text-center ">{index+1}</td>
+              <td className="border  px-1 py-1 md:px-4 md:py-2">
                 <Link
                   to={`${linkPathPrefix}${job.jobID}`}
-                  className="text-blue-600 text-sm md:text-base hover:underline font-bold"
+                  className="text-blue-600 text-sm md:text-base hover:underline font-bold "
                 >
                   {job.title}
                 </Link>
