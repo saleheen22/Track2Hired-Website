@@ -6,7 +6,7 @@ const Hero = () => {
         <div className= "bg-gradient-to-b from-white to-blue-100 py-20 md:py-32 h-[55vh] flex items-center justify-center">
 
            <div className="container mx-auto px-4 text-center ">
-         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-900 mb-6  ">
+         <h1 className="text-2xl md:text-3xl lg:text-5xl xl:text-6xl font-bold text-blue-900 mb-6  ">
            Supercharge Your Job Search With
 
 
@@ -30,11 +30,11 @@ const Hero = () => {
 />
 </span>
             </h1>
-            <p className="text-lg md:text-2xl text-slate-600 mb-8">Never lose track of your job applications again. Track2Hired helps you organize your job search with our browser extension and AI-powered tools to increase your chances of getting hired</p>
+            <p className="text-lg md:text-xl xl:text-2xl text-slate-600 mb-8">Never lose track of your job applications again. Track2Hired helps you organize your job search with our browser extension and AI-powered tools to increase your chances of getting hired</p>
          
-            <div className=" flex flex-col sm:flex-row  justify-center gap-10    ">
-                <button className="btn bg-blue-500  text-white text-lg sm:text-xl text-center sm:p-6 rounded-xl">Get The Extension</button >
-                <button className="btn bg-white text-center border-2 border-blue-500 text-blue-500 sm:p-6 text-lg sm:text-xl rounded-xl">Learn More</button>
+            <div className=" flex  justify-center gap-10    ">
+                <button className="btn bg-blue-500  text-white  xl:text-xl text-center sm:p-6 md:text-lg rounded-xl w-1/3 md:w-auto">Get The Extension</button >
+                <button className="btn bg-white text-center border-2 border-blue-500 text-blue-500 sm:p-6 md:text-lg xl:text-xl rounded-xl w-1/3 md:w-auto">Learn More</button>
 
             </div>
          
