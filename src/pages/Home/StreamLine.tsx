@@ -44,7 +44,7 @@ const StreamLine = () => {
         <h1 className="text-2xl md:text-4xl text-center font-bold text-blue-900 mb-6 mx-auto">Powerful Features to Streamline Your Job Search
         </h1>
         <p className="mx-8 md:mx-auto text-center">Track2Hired combines intelligent tracking with AI-powered tools to help you land your dream job faster.</p>
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mx-8 md:mx-auto">
+         <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-6 mx-8 md:mx-auto">
         {cardData.map((card, idx) => (
           <div key={idx} className="bg-white rounded-lg p-6 flex flex-col  animate__animated animate__lightSpeedInLeft border-b-2 shadow-2xl">
             <div className="text-4xl text-left mb-4">{card.icon}</div>
