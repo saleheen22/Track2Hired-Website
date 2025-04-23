@@ -36,10 +36,10 @@ const handleLogout = async () => {
    <img
       src={logo}
       alt="Track2Hired Logo"
-      className="sm:h-9  h-12 w-auto mr-2 object-contain"
+      className="md:h-9  h-6 w-auto mr-2 object-contain"
     />
    
-    <h1 className="flex justify-center text-center text-bold my-auto text-3xl font-bold
+    <h1 className="flex justify-center text-center text-bold my-auto text-xl md:text-3xl font-bold items-center
 ">Track2Hired</h1>
     </div>
     </Link>
