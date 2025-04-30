@@ -6,7 +6,7 @@ const Footer = () => {
     <div  className="bg-gray-700 text-white">
       <footer className="footer sm:footer-horizontal   p-10 max-w-7xl   mx-auto pt-10 md:pt-20">
   <aside>
-   <img src={logoWhite}alt="logo" className="w-full h-24 mb-4" />
+   <img src={logoWhite}alt="logo" className="w-full h-24 mb-4 " />
     <p>
      Track 2 Hired<br />
     

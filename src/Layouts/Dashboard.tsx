@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import Footer from '../pages/Common/Footer';
+
 import Sidebar from '../pages/Common/Sidebar';
 import DashboardNav from '../pages/Common/DashboardNav';
 
@@ -12,7 +12,7 @@ const Dashboard = () => {
         < Outlet ></Outlet>
         </div>
     
-      <Footer></Footer>
+     
     </div>
   );
 };
