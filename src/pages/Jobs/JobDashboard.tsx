@@ -105,7 +105,7 @@ const JobDashboard = () => {
     return (
         <div className="p-4 md:p-8">
             <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center">Job Application Analytics</h1>
-            <p className="text-lg md:text-xl text-center">Total number of jobs Tracked: {jobs?.length}</p>
+            <p className="text-lg md:text-xl text-center">Total number of jobs Tracked: {totalJobs}</p>
             {jobs.length > 0 ? (
                 <div className="bg-white p-4 rounded-lg shadow-md">
                     <HighchartsReact
