@@ -19,6 +19,8 @@
     "animate.css": "^4.1.1",
     "axios": "^1.8.4",
     "firebase": "^11.6.0",
+    "highcharts": "^12.2.0",
+    "highcharts-react-official": "^3.2.2",
     "lottie-react": "^2.4.1",
     "pdf-parse": "^1.1.1",
     "pdfjs-dist": "^3.4.120",
