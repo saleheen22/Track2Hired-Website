@@ -13,7 +13,7 @@ const Footer = () => {
       <br />
       Your Job Search Command Center
     </p>
-    <p>© 2025 Track2Hired. All rights reserved.</p>
+    <p className="text-sm">© 2025 Track2Hired. All rights reserved.</p>
   </aside>
 
   <nav>
