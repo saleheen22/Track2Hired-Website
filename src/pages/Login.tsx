@@ -6,6 +6,8 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { LoginFormValues } from '../utils/Types/loginType';
 import { AuthContext } from '../provider/AuthProvider';
 import { useNavigate } from 'react-router';
+import { FcGoogle } from 'react-icons/fc';
+
 import Loader from './Common/Loader'
 const Login = () => {
   const navigate = useNavigate();
@@ -104,9 +106,23 @@ const Login = () => {
                   <button type='submit' className="btn bg-blue-500 mt-4 text-white">Login</button>
                 </fieldset>
                </form>
+                 {/* Separator */}
+    <div className="flex items-center my-4">
+      <div className="flex-grow border-t border-gray-300"></div>
+      <span className="mx-2 text-gray-500">Or</span>
+      <div className="flex-grow border-t border-gray-300"></div>
+    </div>
+    {/* Google Sign-In Button */}
+               <button
+      onClick={handleGoogleSignIn}
+      className="btn btn-outline flex items-center justify-center w-full"
+      type="button"
+    >
+      <FcGoogle className="text-2xl mr-2" />
+      Sign in with Google
+    </button>
               </div>
             </div>
-            <button onClick={handleGoogleSignIn} className='btn btn-blue-500'>Google SignIn</button>
           </div>
         </div>
       </div>
