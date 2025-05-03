@@ -27,7 +27,7 @@ const Login = () => {
           if (userCredential ) {
             setLoading(false);
             navigate('/dashboard');
-          // ...
+      
           }
           
           
@@ -45,13 +45,9 @@ const Login = () => {
     }
   return (
     <div className='bg-base-200'>
-      <h1>This is login page</h1>
      
-      <div>
-      
-      <h1 className="text-5xl font-bold text-center">Login now!</h1>
      
-      </div>
+  
       <div >
         <div className="hero min-h-screen">
           <div className="hero-content flex-col lg:flex-row-reverse">
@@ -75,28 +71,33 @@ const Login = () => {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                         message: 'Invalid email address',
                       },
-                  })} type="email" className={`input input-bordered ${errors.email ? 'input-error' : ''}`} placeholder="Email" />
+                  })} type="email" className={`input input-bordered pr-10 ${errors.email ? 'input-error' : ''}`} placeholder="Email" />
                   {errors.email && <span className='text-red-500 text-sm mt-1'>{errors.email.message}</span>}
                   <label className="fieldset-label">Password</label>
-                  <input
-                    type={passOn ? 'password' : 'text'}
-                    className="input"
-                    placeholder="Password"
-                    {...register('password', {
-                        required: 'Password is required',
-                        minLength: {
-                            value: 6,
-                            message: 'Password must be at least 6 characters',
-                        }
-                    })}
-                    
-                  />
-                  {passOn ? <AiFillEyeInvisible className='cursor-pointer text-xl' onClick={()=> setPassON(!passOn)}  />: <AiFillEye className='cursor-pointer text-xl' onClick={()=> setPassON(!passOn)} />}
-
-                  
-
-
-                  {errors.password && <span className='text-red-500 text-sm mt-1'>{errors.password.message}</span>}
+                  <div className="relative">
+  <input
+    type={passOn ? 'password' : 'text'}
+    className={`input input-bordered pr-12 ${errors.password ? 'input-error' : ''}`}
+    placeholder="Password"
+    {...register('password', {
+      required: 'Password is required',
+      minLength: {
+        value: 6,
+        message: 'Password must be at least 6 characters',
+      }
+    })}
+  />
+  <span
+    className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-xl text-gray-500"
+    onClick={() => setPassON(!passOn)}
+    tabIndex={0}
+    role="button"
+    aria-label={passOn ? "Show password" : "Hide password"}
+  >
+    {passOn ? <AiFillEyeInvisible /> : <AiFillEye />}
+  </span>
+</div>
+{errors.password && <span className='text-red-500 text-sm mt-1'>{errors.password.message}</span>}
                   <div>
                     <a className="link link-hover">Forgot password?</a>
                   </div>
