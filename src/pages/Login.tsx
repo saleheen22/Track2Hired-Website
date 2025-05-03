@@ -45,11 +45,9 @@ const Login = () => {
     return <Loader message="Logging you in..." />;
   }
   return (
-    <div className="bg-base-200">
-      <div>
-        <div className="hero min-h-screen w-full">
-          <div className="hero-content ">
-            <div className="card  w-full max-w-sm shrink-0  shadow-2xl">
+    <div className="bg-base-200 min-h-screen flex items-center justify-center">
+    <div className="w-3/4 md:w-1/2 flex justify-center">
+      <div className="card w-full max-w-md shadow-2xl">
               <div className="card-body">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <fieldset className="fieldset">
@@ -127,11 +125,9 @@ const Login = () => {
                   Sign in with Google
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              </div>
     </div>
+  </div>
   );
 };
 
