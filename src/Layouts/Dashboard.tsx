@@ -8,11 +8,9 @@ const Dashboard = () => {
     <div>
       <DashboardNav></DashboardNav>
       <Sidebar></Sidebar>
-      <div className='mx-auto md:ml-64 '>
-        < Outlet ></Outlet>
-        </div>
-    
-     
+      <div className="mx-auto md:ml-64 ">
+        <Outlet></Outlet>
+      </div>
     </div>
   );
 };

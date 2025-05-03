@@ -5,23 +5,21 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 const Sidebar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
- 
+
   const navItems = [
-    { label: "Dashboard", path: "/dashboard" },
-    { label: "Jobs", path: "/dashboard/jobs" },
-    { label: "Cover Letters", path: "/dashboard/cover-letters" },
-    { label: "Company Research", path: "/dashboard/company-research" },
-    {label: "Mock Interviews", path: "/dashboard/mock-interviews"},
-    {label: "Cold Emails", path: "/dashboard/cold-email"},
-    { label: "Resume", path: "/dashboard/resume" },
-    
-    
+    { label: 'Dashboard', path: '/dashboard' },
+    { label: 'Jobs', path: '/dashboard/jobs' },
+    { label: 'Cover Letters', path: '/dashboard/cover-letters' },
+    { label: 'Company Research', path: '/dashboard/company-research' },
+    { label: 'Mock Interviews', path: '/dashboard/mock-interviews' },
+    { label: 'Cold Emails', path: '/dashboard/cold-email' },
+    { label: 'Resume', path: '/dashboard/resume' },
   ];
   const [isOpen, setOpen] = useState<boolean>(false);
   const toggleMenu = () => setOpen(!isOpen);
   // Function to determine if a nav item is active
   const isActive = (path: string) => {
-    if (path === "/dashboard") {
+    if (path === '/dashboard') {
       // For dashboard, only highlight when exactly at /dashboard
       return currentPath === path;
     }
@@ -42,23 +40,23 @@ const Sidebar = () => {
       </div>
 
       {/* Sidebar */}
-      <nav 
+      <nav
         className={`fixed top-18 left-0 h-screen bg-gray-100 p-4 shadow-md z-40 
           transform transition-transform duration-300 w-96
-          ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
           md:translate-x-0 md:w-64`}
       >
         {/* Mobile Close Button */}
-      
+
         <ul className="space-y-4">
-          {navItems.map((item) => (
+          {navItems.map(item => (
             <li key={item.path}>
-              <Link 
-                to={item.path} 
+              <Link
+                to={item.path}
                 className={`block px-4 py-2 rounded transition-colors ${
-                  isActive(item.path) 
-                    ? "bg-blue-500 text-white font-medium" 
-                    : "hover:bg-gray-200"
+                  isActive(item.path)
+                    ? 'bg-blue-500 text-white font-medium'
+                    : 'hover:bg-gray-200'
                 }`}
                 onClick={() => setIsOpen(false)} // close on link click in mobile
               >
@@ -73,5 +71,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-

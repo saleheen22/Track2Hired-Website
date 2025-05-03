@@ -21,11 +21,12 @@ export interface Job {
 interface JobsContextType {
   jobs: Job[];
   setJobs: React.Dispatch<React.SetStateAction<Job[]>>;
-  toggleStatus: (jobID: string, field: 'interview' | 'offer' | 'applied') => Promise<void>;
+  toggleStatus: (
+    jobID: string,
+    field: 'interview' | 'offer' | 'applied'
+  ) => Promise<void>;
   updateInterviewDate: (jobID: string, date: Date | null) => Promise<void>;
   isLoading: boolean;
-
-
 }
 
 export const JobsContext = createContext<JobsContextType>({
@@ -33,12 +34,12 @@ export const JobsContext = createContext<JobsContextType>({
   setJobs: () => {},
   toggleStatus: async () => {},
   updateInterviewDate: async () => {},
-  isLoading: false
-
-
+  isLoading: false,
 });
 
-export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const { user } = useContext(AuthContext);
   const [jobs, setJobs] = useState<Job[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,10 +47,13 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchJobs = async () => {
     if (!user?.email) return;
-    
+
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://localhost:3000/jobs/${user.email}`, {withCredentials: true});
+      const response = await axios.get(
+        `http://localhost:3000/jobs/${user.email}`,
+        { withCredentials: true }
+      );
       setJobs(response.data);
     } catch (error) {
       console.error('Failed to load jobs:', error);
@@ -57,7 +61,6 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsLoading(false);
     }
   };
-
 
   useEffect(() => {
     fetchJobs();
@@ -70,7 +73,10 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
     field: 'interview' | 'offer' | 'applied'
   ) => {
     try {
-      const { data } = await axios.patch(`http://localhost:3000/toggle-status/${jobID}`, { field });
+      const { data } = await axios.patch(
+        `http://localhost:3000/toggle-status/${jobID}`,
+        { field }
+      );
       // Update the state locally based on the new field value returned by the server.
       setJobs(prevJobs =>
         prevJobs.map(job =>
@@ -83,19 +89,27 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
       throw error;
     }
   };
-  const updateInterviewDate = async (jobID: string, interviewDate: Date | null) => {
+  const updateInterviewDate = async (
+    jobID: string,
+    interviewDate: Date | null
+  ) => {
     try {
-      const { data } = await axios.patch(`http://localhost:3000/interview-date/${jobID}`, { 
-        interviewDate 
-      });
-      
+      const { data } = await axios.patch(
+        `http://localhost:3000/interview-date/${jobID}`,
+        {
+          interviewDate,
+        }
+      );
+
       // Update the job in local state with the new interview date
       setJobs(prevJobs =>
         prevJobs.map(job =>
-          job.jobID === jobID ? { ...job, interviewDate: data.interviewDate } : job
+          job.jobID === jobID
+            ? { ...job, interviewDate: data.interviewDate }
+            : job
         )
       );
-      
+
       return data;
     } catch (error) {
       console.error('Error updating interview date:', error);
@@ -103,7 +117,16 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
   return (
-    <JobsContext.Provider value={{ jobs, setJobs, toggleStatus , updateInterviewDate, isLoading, refetchJobs}}>
+    <JobsContext.Provider
+      value={{
+        jobs,
+        setJobs,
+        toggleStatus,
+        updateInterviewDate,
+        isLoading,
+        refetchJobs,
+      }}
+    >
       {children}
     </JobsContext.Provider>
   );
