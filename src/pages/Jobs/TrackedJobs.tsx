@@ -112,7 +112,7 @@ const TrackedJobs = () => {
                   }
                   onChange={date => handleDateChange(job.jobID, date)}
                   dateFormat="MM/dd/yy"
-                  className="input input-xs md:input-sm w-full text-center text-xs md:text-sm"
+                  className="input  w-full text-center text-xs md:text-sm"
                   placeholderText="Select"
                   isClearable
                 />
