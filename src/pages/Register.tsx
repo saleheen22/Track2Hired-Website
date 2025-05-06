@@ -1,157 +1,146 @@
-import Lottie from 'lottie-react';
 import { useContext, useState } from 'react';
-import RegisterAnimation from '../assets/login.json';
 import { useForm } from 'react-hook-form';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { RegisterFormValues } from '../utils/Types/registerType';
 import { AuthContext } from '../provider/AuthProvider';
 import { useNavigate } from 'react-router';
+import Loader from './Common/Loader';
 
 const Register = () => {
   const navigate = useNavigate();
   const { createNewUser } = useContext(AuthContext);
   const [passOn, setPassON] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<RegisterFormValues>();
+  
   const onSubmit = (data: RegisterFormValues) => {
     const { email, password, firstName, lastName } = data;
-    reset();
+    setLoading(true);
+    
     createNewUser({ email, password, firstName, lastName })
       .then(userCredential => {
-        // Signed up
-        // const user = userCredential;
-        // console.log(user);
-        console.log(userCredential);
+        setLoading(false);
         if (userCredential.success) {
+          reset();
+          
           navigate('/dashboard');
         }
-        // ...
+       
       })
       .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ..
+        setLoading(false);
+        console.log(error.code, error.message);
       });
   };
+
+  if (loading) {
+    return <Loader message="Creating your account..." />;
+  }
+
   return (
-    <div className="bg-base-200">
-      <h1>This is Register page</h1>
-
-      <div>
-        <h1 className="text-5xl font-bold text-center">Register now!</h1>
-      </div>
-      <div>
-        <div className="hero min-h-screen">
-          <div className="hero-content flex-col lg:flex-row-reverse">
-            <div className="text-center gap-6 lg:text-left">
-              <p className="py-6">
-                <Lottie
-                  animationData={RegisterAnimation}
-                  className="w-[300px] h-[300px] object-contain mx-auto"
+    <div className="bg-base-200 min-h-screen flex items-center justify-center">
+      <div className="w-full md:w-1/2 flex justify-center">
+        <div className="card w-full max-w-md shadow-2xl">
+          <div className="card-body">
+            <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">Create Account</h1>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <fieldset className="fieldset">
+                <label className="fieldset-label">First Name</label>
+                <input
+                  {...register('firstName', {
+                    required: 'First Name is required',
+                  })}
+                  type="text"
+                  className={`input input-bordered w-full ${errors.firstName ? 'input-error' : ''}`}
+                  placeholder="First Name"
                 />
-              </p>
-            </div>
-            <div className="card  w-full max-w-sm shrink-0  shadow-2xl">
-              <div className="card-body">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <fieldset className="fieldset">
-                    {/* this is name fields */}
+                {errors.firstName && (
+                  <span className="text-red-500 text-sm mt-1">
+                    {errors.firstName.message}
+                  </span>
+                )}
 
-                    <label className="fieldset-label">First Name</label>
-                    <input
-                      {...register('firstName', {
-                        required: 'First Name is required',
-                      })}
-                      type="text"
-                      className={`input input-bordered ${errors.firstName ? 'input-error' : ''}`}
-                      placeholder="First Name"
-                    />
-                    {errors.firstName && (
-                      <span className="text-red-500 text-sm mt-1">
-                        {errors.firstName.message}
-                      </span>
-                    )}
+                <label className="fieldset-label mt-4">Last Name</label>
+                <input
+                  {...register('lastName', {
+                    required: 'Last Name is required',
+                  })}
+                  type="text"
+                  className={`input input-bordered w-full ${errors.lastName ? 'input-error' : ''}`}
+                  placeholder="Last Name"
+                />
+                {errors.lastName && (
+                  <span className="text-red-500 text-sm mt-1">
+                    {errors.lastName.message}
+                  </span>
+                )}
 
-                    {/* last Name is  */}
-                    <label className="fieldset-label">Last Name</label>
-                    <input
-                      {...register('lastName', {
-                        required: 'First Name is required',
-                      })}
-                      type="text"
-                      className={`input input-bordered ${errors.lastName ? 'input-error' : ''}`}
-                      placeholder="First Name"
-                    />
-                    {errors.lastName && (
-                      <span className="text-red-500 text-sm mt-1">
-                        {errors.lastName.message}
-                      </span>
-                    )}
-
-                    {/* this is name fields */}
-                    <label className="fieldset-label">Email</label>
-                    <input
-                      {...register('email', {
-                        required: 'Email is required',
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: 'Invalid email address',
-                        },
-                      })}
-                      type="email"
-                      className={`input input-bordered ${errors.email ? 'input-error' : ''}`}
-                      placeholder="Email"
-                    />
-                    {errors.email && (
-                      <span className="text-red-500 text-sm mt-1">
-                        {errors.email.message}
-                      </span>
-                    )}
-                    <label className="fieldset-label">Password</label>
-                    <input
-                      type={passOn ? 'password' : 'text'}
-                      className="input"
-                      placeholder="Password"
-                      {...register('password', {
-                        required: 'Password is required',
-                        minLength: {
-                          value: 6,
-                          message: 'Password must be at least 6 characters',
-                        },
-                      })}
-                    />
-                    {passOn ? (
-                      <AiFillEyeInvisible
-                        className="cursor-pointer text-xl"
-                        onClick={() => setPassON(!passOn)}
-                      />
-                    ) : (
-                      <AiFillEye
-                        className="cursor-pointer text-xl"
-                        onClick={() => setPassON(!passOn)}
-                      />
-                    )}
-
-                    {errors.password && (
-                      <span className="text-red-500 text-sm mt-1">
-                        {errors.password.message}
-                      </span>
-                    )}
-                    <div>
-                      <a className="link link-hover">Forgot password?</a>
-                    </div>
-                    <button type="submit" className="btn bg-blue-500 mt-4">
-                      Register
-                    </button>
-                  </fieldset>
-                </form>
-              </div>
-            </div>
+                <label className="fieldset-label mt-4">Email</label>
+                <input
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'Invalid email address',
+                    },
+                  })}
+                  type="email"
+                  className={`input input-bordered w-full ${errors.email ? 'input-error' : ''}`}
+                  placeholder="Email"
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-sm mt-1">
+                    {errors.email.message}
+                  </span>
+                )}
+                
+                <label className="fieldset-label mt-4">Password</label>
+                <div className="relative">
+                  <input
+                    type={passOn ? 'password' : 'text'}
+                    className={`input input-bordered w-full pr-12 ${errors.password ? 'input-error' : ''}`}
+                    placeholder="Password"
+                    {...register('password', {
+                      required: 'Password is required',
+                      minLength: {
+                        value: 6,
+                        message: 'Password must be at least 6 characters',
+                      },
+                    })}
+                  />
+                  <span
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-xl text-gray-500"
+                    onClick={() => setPassON(!passOn)}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={passOn ? 'Show password' : 'Hide password'}
+                  >
+                    {passOn ? <AiFillEyeInvisible /> : <AiFillEye />}
+                  </span>
+                </div>
+                {errors.password && (
+                  <span className="text-red-500 text-sm mt-1">
+                    {errors.password.message}
+                  </span>
+                )}
+                
+                <button
+                  type="submit"
+                  className="btn bg-blue-500 text-white w-full mt-6"
+                >
+                  Register
+                </button>
+                
+                <div className="text-center mt-4">
+                  Already have an account? <a href="/login" className="text-blue-600 hover:underline">Login</a>
+                </div>
+              </fieldset>
+            </form>
           </div>
         </div>
       </div>
