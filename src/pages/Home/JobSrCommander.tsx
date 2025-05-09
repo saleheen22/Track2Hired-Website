@@ -19,8 +19,9 @@ const JobSrCommander = () => {
   }, [visible]);
   
   return (
-    <div className="bg-blue-100 mt-5">
-      <div className="max-w-7xl   mx-auto pt-10 md:pt-20">
+    <div className="bg-blue-100 mt-5  mx-auto">
+         <div className="max-w-7xl mx-auto">
+           <div className=" pt-10 md:pt-20 ">
         <h1 className="text-2xl md:text-4xl text-center xl:text-5xl font-bold text-blue-900 mb-6 mx-auto">
           Your Job Search Command Center
         </h1>
@@ -30,6 +31,8 @@ const JobSrCommander = () => {
           applications.
         </p>
       </div>
+      <div className="flex flex-col md:flex-row justify-between items-center">
+    
       <ul className="list-none p-0 mt-6">
       {features.map((item, idx) => (
         <li
@@ -45,6 +48,11 @@ const JobSrCommander = () => {
         </li>
       ))}
     </ul>
+      </div>
+      <div>
+        <p>right</p>
+      </div>
+         </div>
     </div>
   );
 };
