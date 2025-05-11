@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router';
 import { JobsContext } from '../../provider/JobsProvider';
-import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
+import {  TrashIcon } from '@heroicons/react/24/outline';
 import Loader from './Loader';
 
 interface JobTableProps {
   title: string;
   linkPathPrefix: string;
   showActions?: boolean;
-  onEdit?: (jobID: string) => void;
   onDelete?: (jobID: string) => void;
   customActions?: (jobID: string) => React.ReactNode;
 }
@@ -16,8 +15,7 @@ interface JobTableProps {
 const JobTable: React.FC<JobTableProps> = ({
   title,
   linkPathPrefix,
-  showActions = true,
-  onEdit,
+  showActions = false,
   onDelete,
   customActions,
 }) => {
@@ -79,14 +77,7 @@ const JobTable: React.FC<JobTableProps> = ({
                       customActions(job.jobID)
                     ) : (
                       <>
-                        {onEdit && (
-                          <button
-                            className="btn btn-ghost btn-xs p-1"
-                            onClick={() => onEdit(job.jobID)}
-                          >
-                            <PencilSquareIcon className="h-3 w-3 md:h-4 md:w-4 text-blue-600" />
-                          </button>
-                        )}
+                       
                         {onDelete && (
                           <button
                             className="btn btn-ghost btn-xs p-1"

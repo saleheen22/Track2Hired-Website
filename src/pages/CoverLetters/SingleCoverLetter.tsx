@@ -1,18 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Loader from '../Common/Loader';
-
+import EditModal from '../Common/EditModal'
 import {
   ClipboardDocumentIcon,
   ArrowDownTrayIcon,
   SparklesIcon,
+  PencilSquareIcon 
 } from '@heroicons/react/24/outline';
 import { JobsContext } from '../../provider/JobsProvider';
 import { useParams } from 'react-router';
 import axios from 'axios';
 
 const SingleCoverLetter = () => {
-  const { jobs, refetchJobs } = useContext(JobsContext);
-
+  const { jobs, refetchJobs, updateJob } = useContext(JobsContext);
+const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { jobID } = useParams<{ jobID: string }>();
   const [copyStatus, setCopyStatus] = useState('');
 
@@ -29,6 +30,19 @@ const SingleCoverLetter = () => {
       setCoverLetter(currentJob.coverLetter);
     }
   }, [jobs, jobID]);
+  const handleEdit = () => {
+  setIsEditModalOpen(true);
+};
+
+const handleSave = async (updatedData: Partial<Job>) => {
+  try {
+    await updateJob(jobID, updatedData);
+    // Update local state to avoid needing a full refetch
+    setCoverLetter(updatedData.coverLetter || null);
+  } catch (error) {
+    console.error('Error saving cover letter:', error);
+  }
+};
   // Function to generate cover letter
   const generateCoverLetter = async () => {
     setIsGenerating(true);
@@ -142,6 +156,14 @@ const SingleCoverLetter = () => {
               <ArrowDownTrayIcon className="h-4 w-4" />
               Download
             </button>
+              {/* Edit button */}
+  <button
+    onClick={handleEdit}
+    className="btn btn-outline btn-sm flex items-center gap-2"
+  >
+    <PencilSquareIcon className="h-4 w-4" />
+    Edit
+  </button>
 
             {/* Regenerate button */}
             <button
@@ -157,6 +179,15 @@ const SingleCoverLetter = () => {
                 {isGenerating ? 'Generating...' : 'Regenerate'}
               </span>
             </button>
+            {job && (
+  <EditModal
+    isOpen={isEditModalOpen}
+    onClose={() => setIsEditModalOpen(false)}
+    job={job}
+    mode="coverLetter"
+    onSave={handleSave}
+  />
+)}
 
             {/* Display the copy status if available */}
             {copyStatus && (
