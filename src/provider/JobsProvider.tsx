@@ -26,6 +26,10 @@ interface JobsContextType {
     field: 'interview' | 'offer' | 'applied'
   ) => Promise<void>;
   updateInterviewDate: (jobID: string, date: Date | null) => Promise<void>;
+  deleteJob: (jobID: string) => Promise<void>;
+  updateJob: (jobID: string, updatedData: Partial<Job>) => Promise<void>;
+  refetchJobs: () => Promise<void>;
+
   isLoading: boolean;
 }
 
@@ -89,6 +93,42 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
       throw error;
     }
   };
+  const deleteJob = async (jobID: string) => {
+  try {
+    // Make API call to the backend route we created
+    await axios.delete(`http://localhost:3000/jobs/${jobID}`);
+    
+    // Update local state by filtering out the deleted job
+    setJobs(prevJobs => prevJobs.filter(job => job.jobID !== jobID));
+    
+    return { success: true, message: "Job deleted successfully" };
+  } catch (error) {
+    console.error('Error deleting job:', error);
+    throw error;
+  }
+};
+
+const updateJob = async (jobID: string, updatedData: Partial<Job>) => {
+  try {
+    // Make API call to the backend route we created
+    const { data } = await axios.patch(
+      `http://localhost:3000/jobs/${jobID}`,
+      updatedData
+    );
+    
+    // Update the job in local state with the returned data
+    setJobs(prevJobs =>
+      prevJobs.map(job =>
+        job.jobID === jobID ? { ...job, ...data.job } : job
+      )
+    );
+    
+    return data;
+  } catch (error) {
+    console.error('Error updating job:', error);
+    throw error;
+  }
+};
   const updateInterviewDate = async (
     jobID: string,
     interviewDate: Date | null
@@ -125,6 +165,8 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
         updateInterviewDate,
         isLoading,
         refetchJobs,
+        deleteJob,
+        updateJob,
       }}
     >
       {children}
