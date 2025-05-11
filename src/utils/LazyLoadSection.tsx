@@ -4,25 +4,30 @@ interface LazyLoadSectionProps {
   children: React.ReactNode;
   rootMargin?: string;
   threshold?: number;
-  id?: string; // For debugging
+  id?: string;
 }
 
 const LazyLoadSection: React.FC<LazyLoadSectionProps> = ({ 
   children, 
-  rootMargin = '120px', // Reduced from 200px
+  rootMargin = '100px', 
   threshold = 0.1,
   id = 'section'
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Set visibility based on intersection
-        const newIsVisible = entry.isIntersecting;
-        console.log(`Section ${id}: visibility changed to ${newIsVisible}`);
-        setIsVisible(newIsVisible);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          setHasLoaded(true); // Once loaded, we keep the content
+          console.log(`Section ${id}: now visible`);
+        } else {
+          console.log(`Section ${id}: now hidden`);
+          setIsVisible(false);
+        }
       },
       { rootMargin, threshold }
     );
@@ -37,15 +42,27 @@ const LazyLoadSection: React.FC<LazyLoadSectionProps> = ({
   return (
     <div 
       ref={ref} 
-      className="lazy-section" 
-      data-visible={isVisible} 
-      style={{ minHeight: '100px' }} // Important: Give the ref some height before content loads
+      className="lazy-section relative"
+      style={{ minHeight: hasLoaded ? '0px' : '200px' }} // Only use min-height before content loads
     >
-      {isVisible ? children : 
-        <div className="flex items-center justify-center h-32">
-          <p className="text-gray-400">Scrolling will load content...</p>
+      {/* Always render content once loaded, just hide it */}
+      {hasLoaded && (
+        <div 
+          style={{ 
+            opacity: isVisible ? 1 : 0,
+            transition: "opacity 0.5s ease-in-out",
+          }}
+        >
+          {children}
         </div>
-      }
+      )}
+      
+      {/* Show placeholder only before first load */}
+      {!hasLoaded && (
+        <div className="flex items-center justify-center h-48">
+          <p className="text-gray-400">Loading content...</p>
+        </div>
+      )}
     </div>
   );
 };
