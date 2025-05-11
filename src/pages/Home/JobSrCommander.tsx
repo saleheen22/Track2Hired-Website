@@ -50,7 +50,7 @@ const JobSrCommander = () => {
           <h1 className="text-2xl md:text-4xl text-center xl:text-5xl font-bold text-blue-900 mb-6 mx-auto">
             Your Job Search Command Center
           </h1>
-          <p className="mx-8 md:mx-auto text-center text-xl md:text-2xl max-w-3xl py-4 xl:py-8 xl:my-6">
+          <p className="mx-8 md:mx-auto text-center text-xl md:text-2xl max-w-3xl py-4 xl:py-8 xl:my-3">
             Track2Hired's dashboard gives you a complete overview of your job
             search progress with powerful tools to manage every aspect of your
             applications.
@@ -64,7 +64,7 @@ const JobSrCommander = () => {
             viewport={{ once: true }}
             className="mb-10 md:mb-0 w-full md:w-6/12 "
           >
-            <ul className="list-none p-0 mt-6 md:text-lg lg:text-xl xl:text-2xl font-bold">
+            <ul className="list-none p-0 mt-0 md:text-lg lg:text-xl xl:text-2xl font-bold">
               {features.map((feature) => (
                 <motion.li
                   key={feature}

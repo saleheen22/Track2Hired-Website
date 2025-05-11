@@ -25,12 +25,12 @@ export const router = createBrowserRouter([
   {
     path: '/',
     Component: HomeLayout,
-    children: [
-      {
-        path: '/',
-        Component: Page,
-      },
-    ],
+    // children: [
+    //   {
+    //     path: '/',
+    //     Component: Page,
+    //   },
+    // ],
   },
   {
     path: '/login',

@@ -10,7 +10,7 @@ const GetTheExtension = () => {
           process and increased their chances of landing their dream job with
           Track2Hired.
         </p>
-        <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-6">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-6 pb-6 md:pb-8">
           <button className="btn bg-white font-bold text-blue-800  md:text-lg">
             Sign Up Free
             <svg
@@ -34,9 +34,7 @@ const GetTheExtension = () => {
             Download Extension
           </button>
         </div>
-        <p className="text-center text-gray-300 mt-2 md:mt-7">
-          No credit card required. Free plan includes up to 10 job applications.
-        </p>
+      
       </div>
     </div>
   );
