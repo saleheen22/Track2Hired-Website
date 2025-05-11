@@ -56,15 +56,15 @@ const JobSrCommander = () => {
             applications.
           </p>
         </div>
-        <div className="flex flex-col md:flex-row  items-center gap-4 md:gap-12">
+        <div className="flex flex-col md:flex-row  items-center gap-4 md:gap-12 ml-5 lg:ml-0 text-gray-700">
           <motion.div
             variants={container}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="mb-10 md:mb-0 w-full md:w-6/12"
+            className="mb-10 md:mb-0 w-full md:w-6/12 "
           >
-            <ul className="list-none p-0 mt-6">
+            <ul className="list-none p-0 mt-6 md:text-lg lg:text-xl xl:text-2xl font-bold">
               {features.map((feature) => (
                 <motion.li
                   key={feature}
@@ -72,11 +72,24 @@ const JobSrCommander = () => {
                   className="flex items-center mb-4"
                 >
                   <motion.span 
-                    className="text-blue-500 mr-2 flex items-center justify-center"
-                    variants={checkmark}
-                  >
-                    ✔️
-                  </motion.span>
+  className="text-blue-500 mr-2 flex items-center justify-center w-5 h-5"
+  variants={checkmark}
+>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 20 20" 
+    fill="currentColor"
+    width="40" 
+    height="40" 
+    className="min-w-5 min-h-5"
+  >
+    <path 
+      fillRule="evenodd" 
+      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" 
+      clipRule="evenodd"
+    />
+  </svg>
+</motion.span>
                   <span>{feature}</span>
                 </motion.li>
               ))}
@@ -86,11 +99,11 @@ const JobSrCommander = () => {
             <motion.img src={img1} alt="cover letter generator"
             animate={{y:[0,50,0]}}
             transition={{ duration: 10, repeat: Infinity }}
-            className="w-64 md:w-80 lg:w-96 xl:w-[500px] max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded-t-lg border-l-4 border-b-4 border-blue-900 rounded-br-2xl shadow-2xl" />
+            className="w-64 md:w-96  xl:w-[500px] max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded-t-lg border-l-4 border-b-4 border-blue-900 rounded-br-2xl shadow-2xl" />
             <motion.img src={img2} alt="cover letter generator"
             animate={{x:[100,150,100]}}
             transition={{ duration: 10, delay:5, repeat: Infinity }}
-            className="w-64 md:w-80 lg:w-96 xl:w-[500px] max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded-t-lg border-l-4 border-b-4 border-blue-900 rounded-br-2xl shadow-2xl" />
+            className="w-64 md:w-96 xl:w-[500px] max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded-t-lg border-l-4 border-b-4 border-blue-900 rounded-br-2xl shadow-2xl" />
             
           </div>
         </div>
