@@ -183,7 +183,7 @@ const handleSave = async (updatedData: Partial<Job>) => {
   <EditModal
     isOpen={isEditModalOpen}
     onClose={() => setIsEditModalOpen(false)}
-    job={job}
+    job={{...job, coverLetter: coverLetter || job.coverLetter}}
     mode="coverLetter"
     onSave={handleSave}
   />
