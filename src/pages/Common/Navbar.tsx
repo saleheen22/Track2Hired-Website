@@ -30,7 +30,7 @@ const Navbar = () => {
             className="h-6 sm:h-9 md:h-12 w-auto mr-2 object-contain"
           />
           <h1
-            className="flex justify-center text-center text-bold my-auto  text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600
+            className="flex justify-center text-center text-bold my-auto  text-2xl sm:text-3xl md:text-4xl font-bold text-blue-500
  "
           >
             Track2Hired
