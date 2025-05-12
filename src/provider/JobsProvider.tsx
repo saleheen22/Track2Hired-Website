@@ -15,6 +15,7 @@ export interface Job {
   companyResearch?: string;
   interview?: boolean;
   offer?: boolean;
+  mockInterviewData?: string | unknown;
   applied?: boolean;
   interviewDate?: Date | null | string;
   dateExtracted?: Date | null | string;

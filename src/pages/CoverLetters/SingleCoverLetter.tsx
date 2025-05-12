@@ -7,7 +7,7 @@ import {
   SparklesIcon,
   PencilSquareIcon 
 } from '@heroicons/react/24/outline';
-import { JobsContext } from '../../provider/JobsProvider';
+import { JobsContext, Job } from '../../provider/JobsProvider';
 import { useParams } from 'react-router';
 import axios from 'axios';
 
@@ -36,9 +36,10 @@ const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
 const handleSave = async (updatedData: Partial<Job>) => {
   try {
-    await updateJob(jobID, updatedData);
-    // Update local state to avoid needing a full refetch
-    setCoverLetter(updatedData.coverLetter || null);
+        if (jobID) {  
+      await updateJob(jobID, updatedData);
+      setCoverLetter(updatedData.coverLetter || null);
+    }
   } catch (error) {
     console.error('Error saving cover letter:', error);
   }

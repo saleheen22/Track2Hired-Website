@@ -40,7 +40,7 @@ const TrackedJobs = () => {
 
   const handleDateChange = (jobID: string, date: Date | null | string) => {
     console.log('Selected date:', date);
-    updateInterviewDate(jobID, date);
+    updateInterviewDate(jobID, date as Date | null);
   };
   if (isLoading) {
     return <Loader />;
@@ -85,7 +85,7 @@ const TrackedJobs = () => {
                 <a
                   href={job.url}
                   target="_blank"
-                  state={{ job }}
+                  rel="noreferrer"
                   className="text-blue-600 text-sm md:text2xl md:text-base hover:underline font-bold"
                 >
                   {job.title}
