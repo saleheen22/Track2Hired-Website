@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -15,8 +15,8 @@ const Sidebar = () => {
     { label: 'Cold Emails', path: '/dashboard/cold-email' },
     { label: 'Resume', path: '/dashboard/resume' },
   ];
-  const [isOpen, setOpen] = useState<boolean>(false);
-  const toggleMenu = () => setOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const toggleMenu = () => setIsOpen(!isOpen);
   // Function to determine if a nav item is active
   const isActive = (path: string) => {
     if (path === '/dashboard') {

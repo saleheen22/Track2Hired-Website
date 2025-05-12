@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import Loader from '../Common/Loader';
 import { JobsContext, Job } from '../../provider/JobsProvider';
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';

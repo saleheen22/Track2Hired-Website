@@ -22,7 +22,7 @@ const GetTheExtension = () => {
               stroke="currentColor"
               aria-hidden="true"
               data-slot="icon"
-              class="ml-2 h-5 w-5"
+              className="ml-2 h-5 w-5"
             >
               <path
                 stroke-linecap="round"

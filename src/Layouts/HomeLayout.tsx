@@ -5,7 +5,7 @@ import Hero from '../pages/Home/Hero';
 import StreamLine from '../pages/Home/StreamLine';
 
 import LazyLoadSection from '../utils/LazyLoadSection'
-import React, { Suspense, lazy } from 'react';
+import  { Suspense, lazy } from 'react';
 const JobSrCommander = lazy(() => import('../pages/Home/JobSrCommander'));
 const GetTheExtension = lazy(() => import('../pages/Home/GetTheExtension'));
 const HomeLayout = () => {

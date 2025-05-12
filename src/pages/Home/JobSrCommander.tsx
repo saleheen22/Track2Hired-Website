@@ -1,4 +1,4 @@
-import React from "react";
+
 import { motion } from "framer-motion";
 import "animate.css";
 import img1 from '../../assets/web/genrate-cover-Letter.png';

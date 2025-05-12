@@ -188,7 +188,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         { withCredentials: true }
       );
       console.log('User signed out successfully');
-      return { success: true, message: 'User signed out successfully' };
+      return ;
     } catch (error) {
       console.error('An error occurred while signing out:', error);
       return { success: false, message: 'An error occurred while signing out' };

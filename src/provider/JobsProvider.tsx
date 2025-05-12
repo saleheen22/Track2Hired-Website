@@ -9,6 +9,8 @@ export interface Job {
   company: string;
   description: string;
   title: string;
+  coldEmail?: string;
+  url?: string;
   coverLetter?: string;
   companyResearch?: string;
   interview?: boolean;
@@ -38,6 +40,9 @@ export const JobsContext = createContext<JobsContextType>({
   setJobs: () => {},
   toggleStatus: async () => {},
   updateInterviewDate: async () => {},
+  deleteJob: async () => {},
+  updateJob: async () => {},
+  refetchJobs: async () => {},
   isLoading: false,
 });
 
@@ -101,7 +106,7 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
     // Update local state by filtering out the deleted job
     setJobs(prevJobs => prevJobs.filter(job => job.jobID !== jobID));
     
-    return { success: true, message: "Job deleted successfully" };
+    return ;
   } catch (error) {
     console.error('Error deleting job:', error);
     throw error;
