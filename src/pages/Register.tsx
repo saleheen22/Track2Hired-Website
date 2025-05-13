@@ -5,8 +5,11 @@ import { RegisterFormValues } from '../utils/Types/registerType';
 import { AuthContext } from '../provider/AuthProvider';
 import { useNavigate } from 'react-router';
 import Loader from './Common/Loader';
+import {JobsContext} from '../provider/JobsProvider';
 
 const Register = () => {
+  const { refetchJobs } = useContext(JobsContext);
+
   const navigate = useNavigate();
   const { createNewUser } = useContext(AuthContext);
   const [passOn, setPassON] = useState<boolean>(false);
@@ -27,7 +30,7 @@ const Register = () => {
         setLoading(false);
         if (userCredential.success) {
           reset();
-
+          refetchJobs();
           navigate('/dashboard');
         }
       })

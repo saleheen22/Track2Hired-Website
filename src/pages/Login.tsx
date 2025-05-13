@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-
+import {JobsContext} from '../provider/JobsProvider';
 import { useForm } from 'react-hook-form';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { LoginFormValues } from '../utils/Types/loginType';
@@ -12,6 +12,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [passOn, setPassON] = useState<boolean>(false);
   const { signInNewUser, signInWithGoogle } = useContext(AuthContext);
+  const { refetchJobs } = useContext(JobsContext);
+
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -22,6 +24,7 @@ const Login = () => {
     setLoading(true);
     await signInWithGoogle();
     setLoading(false);
+    refetchJobs();
     navigate('/dashboard');
   };
   const onSubmit = (data: LoginFormValues) => {
@@ -31,6 +34,7 @@ const Login = () => {
         // Signed in
         if (userCredential) {
           setLoading(false);
+          refetchJobs();
           navigate('/dashboard');
         }
       })
