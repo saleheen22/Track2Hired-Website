@@ -21,6 +21,8 @@ import SingleMockInterview from '../pages/MockInterview/SingleMockInterview';
 import JobDashboard from '../pages/Jobs/JobDashboard';
 import ColdEmailsJob from '../pages/ColdEmail/ColdEmailsJob';
 import SingleColdEmail from '../pages/ColdEmail/SingleColdEmail';
+import AboutUs from '../pages/AboutUs';
+import Privacy from '../pages/Privacy';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -31,6 +33,14 @@ export const router = createBrowserRouter([
     //     Component: Page,
     //   },
     // ],
+  },
+  {
+    path: '/about',
+    Component: AboutUs
+  },
+  {
+    path: '/privacy',
+    Component: Privacy
   },
   {
     path: '/login',
