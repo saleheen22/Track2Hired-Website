@@ -67,8 +67,9 @@ const SingleMockInterview = () => {
           jobTitle: job.title,
           company: job.company,
           description: job.description,
-        },{
-          withCredentials: true
+        },
+        {
+          withCredentials: true,
         }
       );
 

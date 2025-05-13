@@ -1,4 +1,4 @@
-import  { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Loader from '../Common/Loader';
 
 import {
@@ -40,7 +40,8 @@ const SingleCompany = () => {
         `https://track2hired-server.onrender.com/companySearch/${jobID}`,
         {},
         {
-          withCredentials: true}
+          withCredentials: true,
+        }
       );
       refetchJobs();
       const companyResearch = response.data.companyResearch;

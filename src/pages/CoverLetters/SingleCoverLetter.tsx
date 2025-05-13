@@ -1,11 +1,11 @@
-import  { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Loader from '../Common/Loader';
-import EditModal from '../Common/EditModal'
+import EditModal from '../Common/EditModal';
 import {
   ClipboardDocumentIcon,
   ArrowDownTrayIcon,
   SparklesIcon,
-  PencilSquareIcon 
+  PencilSquareIcon,
 } from '@heroicons/react/24/outline';
 import { JobsContext, Job } from '../../provider/JobsProvider';
 import { useParams } from 'react-router';
@@ -13,7 +13,7 @@ import axios from 'axios';
 
 const SingleCoverLetter = () => {
   const { jobs, refetchJobs, updateJob } = useContext(JobsContext);
-const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { jobID } = useParams<{ jobID: string }>();
   const [copyStatus, setCopyStatus] = useState('');
 
@@ -31,19 +31,19 @@ const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     }
   }, [jobs, jobID]);
   const handleEdit = () => {
-  setIsEditModalOpen(true);
-};
+    setIsEditModalOpen(true);
+  };
 
-const handleSave = async (updatedData: Partial<Job>) => {
-  try {
-        if (jobID) {  
-      await updateJob(jobID, updatedData);
-      setCoverLetter(updatedData.coverLetter || null);
+  const handleSave = async (updatedData: Partial<Job>) => {
+    try {
+      if (jobID) {
+        await updateJob(jobID, updatedData);
+        setCoverLetter(updatedData.coverLetter || null);
+      }
+    } catch (error) {
+      console.error('Error saving cover letter:', error);
     }
-  } catch (error) {
-    console.error('Error saving cover letter:', error);
-  }
-};
+  };
   // Function to generate cover letter
   const generateCoverLetter = async () => {
     setIsGenerating(true);
@@ -51,8 +51,9 @@ const handleSave = async (updatedData: Partial<Job>) => {
     try {
       const response = await axios.post(
         `https://track2hired-server.onrender.com/generate-cover-letter/${jobID}`,
-        {},{
-          withCredentials: true
+        {},
+        {
+          withCredentials: true,
         }
       );
       refetchJobs();
@@ -160,14 +161,14 @@ const handleSave = async (updatedData: Partial<Job>) => {
               <ArrowDownTrayIcon className="h-4 w-4" />
               Download
             </button>
-              {/* Edit button */}
-  <button
-    onClick={handleEdit}
-    className="btn btn-outline btn-sm flex items-center gap-2"
-  >
-    <PencilSquareIcon className="h-4 w-4" />
-    Edit
-  </button>
+            {/* Edit button */}
+            <button
+              onClick={handleEdit}
+              className="btn btn-outline btn-sm flex items-center gap-2"
+            >
+              <PencilSquareIcon className="h-4 w-4" />
+              Edit
+            </button>
 
             {/* Regenerate button */}
             <button
@@ -184,14 +185,14 @@ const handleSave = async (updatedData: Partial<Job>) => {
               </span>
             </button>
             {job && (
-  <EditModal
-    isOpen={isEditModalOpen}
-    onClose={() => setIsEditModalOpen(false)}
-    job={{...job, coverLetter: coverLetter || job.coverLetter}}
-    mode="coverLetter"
-    onSave={handleSave}
-  />
-)}
+              <EditModal
+                isOpen={isEditModalOpen}
+                onClose={() => setIsEditModalOpen(false)}
+                job={{ ...job, coverLetter: coverLetter || job.coverLetter }}
+                mode="coverLetter"
+                onSave={handleSave}
+              />
+            )}
 
             {/* Display the copy status if available */}
             {copyStatus && (

@@ -6,14 +6,21 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import EditModal from '../Common/EditModal';
 const TrackedJobs = () => {
- const { jobs, toggleStatus, updateInterviewDate, deleteJob, updateJob, isLoading } = useContext(JobsContext);
+  const {
+    jobs,
+    toggleStatus,
+    updateInterviewDate,
+    deleteJob,
+    updateJob,
+    isLoading,
+  } = useContext(JobsContext);
   console.log(jobs.length);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [currentJob, setCurrentJob] = useState<Job | null>(null);
   const handleToggle = (job: Job, field: 'applied' | 'interview' | 'offer') => {
     toggleStatus(job.jobID, field);
   };
-    const handleDelete = async (jobID: string) => {
+  const handleDelete = async (jobID: string) => {
     if (window.confirm('Are you sure you want to delete this job?')) {
       try {
         await deleteJob(jobID);
@@ -22,12 +29,12 @@ const TrackedJobs = () => {
       }
     }
   };
-  
+
   const handleEdit = (job: Job) => {
     setCurrentJob(job);
     setIsEditModalOpen(true);
   };
-  
+
   const handleSave = async (updatedData: Partial<Job>) => {
     if (currentJob) {
       try {
@@ -144,37 +151,36 @@ const TrackedJobs = () => {
               </td>
 
               {/* Actions */}
-                <td className="border px-1 py-1 md:px-4 md:py-2">
-    <div className="flex space-x-1 md:space-x-2 justify-center">
-      <button 
-        className="btn btn-ghost btn-xs p-1"
-        onClick={() => handleEdit(job)}
-      >
-        <PencilSquareIcon className="h-3 w-3 md:h-4 md:w-4 text-blue-600" />
-      </button>
-      <button 
-        className="btn btn-ghost btn-xs p-1"
-        onClick={() => handleDelete(job.jobID)}
-      >
-        <TrashIcon className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
-      </button>
-    </div>
-  </td>
+              <td className="border px-1 py-1 md:px-4 md:py-2">
+                <div className="flex space-x-1 md:space-x-2 justify-center">
+                  <button
+                    className="btn btn-ghost btn-xs p-1"
+                    onClick={() => handleEdit(job)}
+                  >
+                    <PencilSquareIcon className="h-3 w-3 md:h-4 md:w-4 text-blue-600" />
+                  </button>
+                  <button
+                    className="btn btn-ghost btn-xs p-1"
+                    onClick={() => handleDelete(job.jobID)}
+                  >
+                    <TrashIcon className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
-        {currentJob && (
-    <EditModal
-      isOpen={isEditModalOpen}
-      onClose={() => setIsEditModalOpen(false)}
-      job={currentJob}
-      mode="job"
-      onSave={handleSave}
-    />
-  )}
+      {currentJob && (
+        <EditModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          job={currentJob}
+          mode="job"
+          onSave={handleSave}
+        />
+      )}
     </div>
-    
   );
 };
 

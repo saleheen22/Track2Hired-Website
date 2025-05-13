@@ -1,6 +1,6 @@
 {
   "hosting": {
-        "headers": [
+    "headers": [
       {
         "source": "**",
         "headers": [
@@ -12,11 +12,7 @@
       }
     ],
     "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",

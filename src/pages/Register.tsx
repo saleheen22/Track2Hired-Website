@@ -17,20 +17,19 @@ const Register = () => {
     formState: { errors },
     reset,
   } = useForm<RegisterFormValues>();
-  
+
   const onSubmit = (data: RegisterFormValues) => {
     const { email, password, firstName, lastName } = data;
     setLoading(true);
-    
+
     createNewUser({ email, password, firstName, lastName })
       .then(userCredential => {
         setLoading(false);
         if (userCredential.success) {
           reset();
-          
+
           navigate('/dashboard');
         }
-       
       })
       .catch(error => {
         setLoading(false);
@@ -47,7 +46,9 @@ const Register = () => {
       <div className="w-full md:w-1/2 flex justify-center">
         <div className="card w-full max-w-md shadow-2xl">
           <div className="card-body">
-            <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">Create Account</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">
+              Create Account
+            </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="fieldset">
                 <label className="fieldset-label">First Name</label>
@@ -98,7 +99,7 @@ const Register = () => {
                     {errors.email.message}
                   </span>
                 )}
-                
+
                 <label className="fieldset-label mt-4">Password</label>
                 <div className="relative">
                   <input
@@ -128,16 +129,19 @@ const Register = () => {
                     {errors.password.message}
                   </span>
                 )}
-                
+
                 <button
                   type="submit"
                   className="btn bg-blue-500 text-white w-full mt-6"
                 >
                   Register
                 </button>
-                
+
                 <div className="text-center mt-4">
-                  Already have an account? <a href="/login" className="text-blue-600 hover:underline">Login</a>
+                  Already have an account?{' '}
+                  <a href="/login" className="text-blue-600 hover:underline">
+                    Login
+                  </a>
                 </div>
               </fieldset>
             </form>

@@ -101,44 +101,45 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
   const deleteJob = async (jobID: string) => {
-  try {
-    // Make API call to the backend route we created
-    await axios.delete(`https://track2hired-server.onrender.com/jobs/${jobID}`,
-      { withCredentials: true }
-    );
-    
-    // Update local state by filtering out the deleted job
-    setJobs(prevJobs => prevJobs.filter(job => job.jobID !== jobID));
-    
-    return ;
-  } catch (error) {
-    console.error('Error deleting job:', error);
-    throw error;
-  }
-};
+    try {
+      // Make API call to the backend route we created
+      await axios.delete(
+        `https://track2hired-server.onrender.com/jobs/${jobID}`,
+        { withCredentials: true }
+      );
 
-const updateJob = async (jobID: string, updatedData: Partial<Job>) => {
-  try {
-    // Make API call to the backend route we created
-    const { data } = await axios.patch(
-      `https://track2hired-server.onrender.com/jobs/${jobID}`,
-      updatedData,
-      { withCredentials: true }
-    );
-    
-    // Update the job in local state with the returned data
-    setJobs(prevJobs =>
-      prevJobs.map(job =>
-        job.jobID === jobID ? { ...job, ...data.job } : job
-      )
-    );
-    
-    return data;
-  } catch (error) {
-    console.error('Error updating job:', error);
-    throw error;
-  }
-};
+      // Update local state by filtering out the deleted job
+      setJobs(prevJobs => prevJobs.filter(job => job.jobID !== jobID));
+
+      return;
+    } catch (error) {
+      console.error('Error deleting job:', error);
+      throw error;
+    }
+  };
+
+  const updateJob = async (jobID: string, updatedData: Partial<Job>) => {
+    try {
+      // Make API call to the backend route we created
+      const { data } = await axios.patch(
+        `https://track2hired-server.onrender.com/jobs/${jobID}`,
+        updatedData,
+        { withCredentials: true }
+      );
+
+      // Update the job in local state with the returned data
+      setJobs(prevJobs =>
+        prevJobs.map(job =>
+          job.jobID === jobID ? { ...job, ...data.job } : job
+        )
+      );
+
+      return data;
+    } catch (error) {
+      console.error('Error updating job:', error);
+      throw error;
+    }
+  };
   const updateInterviewDate = async (
     jobID: string,
     interviewDate: Date | null
@@ -146,11 +147,11 @@ const updateJob = async (jobID: string, updatedData: Partial<Job>) => {
     try {
       const { data } = await axios.patch(
         `https://track2hired-server.onrender.com/interview-date/${jobID}`,
-       
+
         {
           interviewDate,
         },
-         {withCredentials: true}
+        { withCredentials: true }
       );
 
       // Update the job in local state with the new interview date

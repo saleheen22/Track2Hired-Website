@@ -5,7 +5,6 @@ const Companies = () => {
     <JobTable
       title="Company Research"
       linkPathPrefix="/dashboard/company-research/"
-  
       onDelete={jobID => {
         console.log(`Delete job ${jobID}`);
         // Add your delete logic here

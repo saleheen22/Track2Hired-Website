@@ -9,12 +9,12 @@ interface EditModalProps {
   onSave: (updatedData: Partial<Job>) => Promise<void>;
 }
 
-const EditModal: React.FC<EditModalProps> = ({ 
-  isOpen, 
-  onClose, 
-  job, 
-  mode, 
-  onSave 
+const EditModal: React.FC<EditModalProps> = ({
+  isOpen,
+  onClose,
+  job,
+  mode,
+  onSave,
 }) => {
   const [title, setTitle] = useState(job.title || '');
   const [company, setCompany] = useState(job.company || '');
@@ -22,7 +22,9 @@ const EditModal: React.FC<EditModalProps> = ({
   const [url, setUrl] = useState(job.url || '');
   const [coverLetter, setCoverLetter] = useState(job.coverLetter || '');
   const [coldEmail, setColdEmail] = useState(job.coldEmail || '');
-  const [companyResearch, setCompanyResearch] = useState(job.companyResearch || '');
+  const [companyResearch, setCompanyResearch] = useState(
+    job.companyResearch || ''
+  );
   const [isSaving, setIsSaving] = useState(false);
 
   if (!isOpen) return null;
@@ -31,7 +33,7 @@ const EditModal: React.FC<EditModalProps> = ({
     setIsSaving(true);
     try {
       const updatedData: Partial<Job> = {};
-      
+
       if (mode === 'job') {
         updatedData.title = title;
         updatedData.company = company;
@@ -44,7 +46,7 @@ const EditModal: React.FC<EditModalProps> = ({
       } else if (mode === 'companyResearch') {
         updatedData.companyResearch = companyResearch;
       }
-      
+
       await onSave(updatedData);
       onClose();
     } catch (error) {
@@ -59,94 +61,112 @@ const EditModal: React.FC<EditModalProps> = ({
       <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <h2 className="text-2xl font-bold mb-4">
-            {mode === 'job' ? 'Edit Job Details' : 
-             mode === 'coverLetter' ? 'Edit Cover Letter' : 
-             mode === 'companyResearch' ? 'Edit Company Research' : 'Edit Cold Email'}
+            {mode === 'job'
+              ? 'Edit Job Details'
+              : mode === 'coverLetter'
+                ? 'Edit Cover Letter'
+                : mode === 'companyResearch'
+                  ? 'Edit Company Research'
+                  : 'Edit Cold Email'}
           </h2>
-          
+
           {mode === 'job' && (
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Job Title</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Job Title
+                </label>
                 <input
                   type="text"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={e => setTitle(e.target.value)}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700">Company</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Company
+                </label>
                 <input
                   type="text"
                   value={company}
-                  onChange={(e) => setCompany(e.target.value)}
+                  onChange={e => setCompany(e.target.value)}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700">URL</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  URL
+                </label>
                 <input
                   type="text"
                   value={url}
-                  onChange={(e) => setUrl(e.target.value)}
+                  onChange={e => setUrl(e.target.value)}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700">Job Description</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Job Description
+                </label>
                 <textarea
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={e => setDescription(e.target.value)}
                   rows={6}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
             </div>
           )}
-          
+
           {mode === 'coverLetter' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Cover Letter Content</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Cover Letter Content
+              </label>
               <textarea
                 value={coverLetter}
-                onChange={(e) => setCoverLetter(e.target.value)}
+                onChange={e => setCoverLetter(e.target.value)}
                 rows={15}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-serif"
                 style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}
               />
             </div>
           )}
-          
+
           {mode === 'coldEmail' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Cold Email Content</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Cold Email Content
+              </label>
               <textarea
                 value={coldEmail}
-                onChange={(e) => setColdEmail(e.target.value)}
+                onChange={e => setColdEmail(e.target.value)}
                 rows={15}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-serif"
                 style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}
               />
             </div>
           )}
-          
+
           {mode === 'companyResearch' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Company Research Content</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Company Research Content
+              </label>
               <textarea
                 value={companyResearch}
-                onChange={(e) => setCompanyResearch(e.target.value)}
+                onChange={e => setCompanyResearch(e.target.value)}
                 rows={15}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-serif"
                 style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}
               />
             </div>
           )}
-          
+
           <div className="mt-6 flex justify-end space-x-3">
             <button
               onClick={onClose}

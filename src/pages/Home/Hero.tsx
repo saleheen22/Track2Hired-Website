@@ -1,6 +1,5 @@
-
 import { Typewriter } from 'react-simple-typewriter';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 const Hero = () => {
   return (
     <div className="bg-gradient-to-b from-white to-blue-100">
@@ -39,7 +38,7 @@ const Hero = () => {
               Get The Extension
             </button>
             <button className="btn bg-white text-center border-2 border-blue-500 text-blue-500 sm:p-6 md:text-lg xl:text-xl rounded-xl w-1/3 md:w-auto">
-              <Link to='/about'>Learn More</Link>
+              <Link to="/about">Learn More</Link>
             </button>
           </div>
         </div>

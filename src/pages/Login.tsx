@@ -49,7 +49,9 @@ const Login = () => {
       <div className="w-full md:w-1/2 flex justify-center">
         <div className="card w-full max-w-md shadow-2xl">
           <div className="card-body">
-          <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">Sign in</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">
+              Sign in
+            </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="fieldset">
                 <label className="fieldset-label">Email</label>
@@ -115,11 +117,11 @@ const Login = () => {
               </fieldset>
             </form>
             <div className="text-center mt-4">
-  Don't have an account?{' '}
-  <a href="/register" className="text-blue-600 hover:underline">
-    Register
-  </a>
-</div>
+              Don't have an account?{' '}
+              <a href="/register" className="text-blue-600 hover:underline">
+                Register
+              </a>
+            </div>
             {/* Separator */}
             <div className="flex items-center my-4">
               <div className="flex-grow border-t border-gray-300"></div>
@@ -140,7 +142,6 @@ const Login = () => {
       </div>
     </div>
   );
-
 };
 
 export default Login;

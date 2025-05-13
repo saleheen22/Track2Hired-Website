@@ -9,7 +9,6 @@ import * as pdfjs from 'pdfjs-dist';
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const Resume = () => {
- 
   const { user } = useContext(AuthContext);
   const [extractedText, setExtractedText] = useState<string>('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -31,9 +30,12 @@ const Resume = () => {
   const fetchExistingResume = async (email: string) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`https://track2hired-server.onrender.com/resume/${email}`,{
-        withCredentials: true
-      });
+      const response = await axios.get(
+        `https://track2hired-server.onrender.com/resume/${email}`,
+        {
+          withCredentials: true,
+        }
+      );
 
       if (response.data.success && response.data.resume) {
         setExtractedText(response.data.resume.extractedText || '');
@@ -61,8 +63,9 @@ const Resume = () => {
           fileName: resumeFile?.name || 'resume.pdf',
 
           extractedText: extractedText,
-        },{
-          withCredentials: true
+        },
+        {
+          withCredentials: true,
         }
       );
 

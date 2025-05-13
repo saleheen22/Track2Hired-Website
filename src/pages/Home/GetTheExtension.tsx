@@ -1,4 +1,4 @@
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 const GetTheExtension = () => {
   return (
     <div className="bg-blue-700 text-white">
@@ -13,7 +13,7 @@ const GetTheExtension = () => {
         </p>
         <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-6 pb-6 md:pb-8">
           <button className="btn bg-white font-bold text-blue-800  md:text-lg">
-            <Link to='/register'>Sign Up Free</Link>
+            <Link to="/register">Sign Up Free</Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -35,7 +35,6 @@ const GetTheExtension = () => {
             Download Extension
           </button>
         </div>
-      
       </div>
     </div>
   );

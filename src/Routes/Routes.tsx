@@ -23,6 +23,7 @@ import ColdEmailsJob from '../pages/ColdEmail/ColdEmailsJob';
 import SingleColdEmail from '../pages/ColdEmail/SingleColdEmail';
 import AboutUs from '../pages/AboutUs';
 import Privacy from '../pages/Privacy';
+import AddJob from '../pages/AddJob';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -36,11 +37,11 @@ export const router = createBrowserRouter([
   },
   {
     path: '/about',
-    Component: AboutUs
+    Component: AboutUs,
   },
   {
     path: '/privacy',
-    Component: Privacy
+    Component: Privacy,
   },
   {
     path: '/login',
@@ -85,6 +86,7 @@ export const router = createBrowserRouter([
       { path: 'mock-interviews/:jobID', Component: SingleMockInterview },
       { path: 'cold-email', Component: ColdEmailsJob },
       { path: 'cold-email/:jobID', Component: SingleColdEmail },
+      { path: 'add-job', Component: AddJob },
     ],
   },
 ]);

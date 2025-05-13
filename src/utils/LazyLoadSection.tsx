@@ -7,11 +7,11 @@ interface LazyLoadSectionProps {
   id?: string;
 }
 
-const LazyLoadSection: React.FC<LazyLoadSectionProps> = ({ 
-  children, 
-  rootMargin = '100px', 
+const LazyLoadSection: React.FC<LazyLoadSectionProps> = ({
+  children,
+  rootMargin = '100px',
   threshold = 0.1,
-  id = 'section'
+  id = 'section',
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -31,32 +31,32 @@ const LazyLoadSection: React.FC<LazyLoadSectionProps> = ({
       },
       { rootMargin, threshold }
     );
-    
+
     if (ref.current) {
       observer.observe(ref.current);
     }
-    
+
     return () => observer.disconnect();
   }, [rootMargin, threshold, id]);
 
   return (
-    <div 
-      ref={ref} 
+    <div
+      ref={ref}
       className="lazy-section relative"
       style={{ minHeight: hasLoaded ? '0px' : '200px' }} // Only use min-height before content loads
     >
       {/* Always render content once loaded, just hide it */}
       {hasLoaded && (
-        <div 
-          style={{ 
+        <div
+          style={{
             opacity: isVisible ? 1 : 0,
-            transition: "opacity 0.5s ease-in-out",
+            transition: 'opacity 0.5s ease-in-out',
           }}
         >
           {children}
         </div>
       )}
-      
+
       {/* Show placeholder only before first load */}
       {!hasLoaded && (
         <div className="flex items-center justify-center h-48">

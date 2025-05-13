@@ -14,6 +14,7 @@ const Sidebar = () => {
     { label: 'Mock Interviews', path: '/dashboard/mock-interviews' },
     { label: 'Cold Emails', path: '/dashboard/cold-email' },
     { label: 'Resume', path: '/dashboard/resume' },
+    { label: '✚ Add Job', path: '/dashboard/add-job' },
   ];
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleMenu = () => setIsOpen(!isOpen);

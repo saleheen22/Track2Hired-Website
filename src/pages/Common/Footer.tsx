@@ -1,4 +1,3 @@
-
 import logoWhite from '../../assets/logo_white.png';
 
 const Footer = () => {

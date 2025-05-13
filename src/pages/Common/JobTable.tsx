@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router';
 import { JobsContext } from '../../provider/JobsProvider';
-import {  TrashIcon } from '@heroicons/react/24/outline';
+import { TrashIcon } from '@heroicons/react/24/outline';
 import Loader from './Loader';
 
 interface JobTableProps {
@@ -77,7 +77,6 @@ const JobTable: React.FC<JobTableProps> = ({
                       customActions(job.jobID)
                     ) : (
                       <>
-                       
                         {onDelete && (
                           <button
                             className="btn btn-ghost btn-xs p-1"

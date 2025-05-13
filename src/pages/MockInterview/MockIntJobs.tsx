@@ -5,7 +5,6 @@ const MockIntJobs = () => {
     <JobTable
       title="Interview Preparation"
       linkPathPrefix="/dashboard/mock-interviews/"
- 
       onDelete={jobID => {
         console.log(`Delete job ${jobID}`);
         // Add your delete logic here
