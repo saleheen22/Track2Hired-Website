@@ -2,16 +2,17 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../provider/AuthProvider';
 import { ArrowUpTrayIcon, DocumentIcon } from '@heroicons/react/24/outline';
-import { JobsContext } from '../provider/JobsProvider';
+
 import * as pdfjs from 'pdfjs-dist';
 
 // Set up PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const Resume = () => {
-  const { jobs } = useContext(JobsContext);
+ 
   const { user } = useContext(AuthContext);
   const [extractedText, setExtractedText] = useState<string>('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isExtracting, setIsExtracting] = useState<boolean>(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [resumeUrl, setResumeUrl] = useState<string | null>(null);
@@ -30,7 +31,9 @@ const Resume = () => {
   const fetchExistingResume = async (email: string) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://localhost:3000/resume/${email}`);
+      const response = await axios.get(`https://track2hired-server.onrender.com/resume/${email}`,{
+        withCredentials: true
+      });
 
       if (response.data.success && response.data.resume) {
         setExtractedText(response.data.resume.extractedText || '');
@@ -53,11 +56,13 @@ const Resume = () => {
     try {
       // Send to server
       const response = await axios.patch(
-        `http://localhost:3000/resume/upload/${user.email}`,
+        `https://track2hired-server.onrender.com/resume/upload/${user.email}`,
         {
           fileName: resumeFile?.name || 'resume.pdf',
 
           extractedText: extractedText,
+        },{
+          withCredentials: true
         }
       );
 

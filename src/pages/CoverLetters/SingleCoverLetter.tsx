@@ -50,7 +50,10 @@ const handleSave = async (updatedData: Partial<Job>) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/generate-cover-letter/${jobID}`
+        `https://track2hired-server.onrender.com/generate-cover-letter/${jobID}`,
+        {},{
+          withCredentials: true
+        }
       );
       refetchJobs();
       const coverLetter = response.data.coverLetter;

@@ -61,7 +61,7 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `http://localhost:3000/jobs/${user.email}`,
+        `https://track2hired-server.onrender.com/jobs/${user.email}`,
         { withCredentials: true }
       );
       setJobs(response.data);
@@ -84,8 +84,9 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
   ) => {
     try {
       const { data } = await axios.patch(
-        `http://localhost:3000/toggle-status/${jobID}`,
-        { field }
+        `https://track2hired-server.onrender.com/toggle-status/${jobID}`,
+        { field },
+        { withCredentials: true }
       );
       // Update the state locally based on the new field value returned by the server.
       setJobs(prevJobs =>
@@ -102,7 +103,9 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
   const deleteJob = async (jobID: string) => {
   try {
     // Make API call to the backend route we created
-    await axios.delete(`http://localhost:3000/jobs/${jobID}`);
+    await axios.delete(`https://track2hired-server.onrender.com/jobs/${jobID}`,
+      { withCredentials: true }
+    );
     
     // Update local state by filtering out the deleted job
     setJobs(prevJobs => prevJobs.filter(job => job.jobID !== jobID));
@@ -118,8 +121,9 @@ const updateJob = async (jobID: string, updatedData: Partial<Job>) => {
   try {
     // Make API call to the backend route we created
     const { data } = await axios.patch(
-      `http://localhost:3000/jobs/${jobID}`,
-      updatedData
+      `https://track2hired-server.onrender.com/jobs/${jobID}`,
+      updatedData,
+      { withCredentials: true }
     );
     
     // Update the job in local state with the returned data
@@ -141,10 +145,12 @@ const updateJob = async (jobID: string, updatedData: Partial<Job>) => {
   ) => {
     try {
       const { data } = await axios.patch(
-        `http://localhost:3000/interview-date/${jobID}`,
+        `https://track2hired-server.onrender.com/interview-date/${jobID}`,
+       
         {
           interviewDate,
-        }
+        },
+         {withCredentials: true}
       );
 
       // Update the job in local state with the new interview date

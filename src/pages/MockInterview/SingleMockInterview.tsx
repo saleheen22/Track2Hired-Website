@@ -62,11 +62,13 @@ const SingleMockInterview = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/generate-interview/${jobID}`,
+        `https://track2hired-server.onrender.com/generate-interview/${jobID}`,
         {
           jobTitle: job.title,
           company: job.company,
           description: job.description,
+        },{
+          withCredentials: true
         }
       );
 

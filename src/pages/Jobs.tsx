@@ -22,7 +22,7 @@ const Jobs = () => {
     mutationFn: async (jobId: string) => {
       setGeneratingCompanyId(jobId);
       const response = await axios.post(
-        `http://localhost:3000/companySearch/${jobId}`
+        `https://track2hired-server.onrender.com/companySearch/${jobId}`, {withCredentials: true}
       );
       return response.data;
     },
@@ -57,7 +57,9 @@ const Jobs = () => {
     queryFn: async () => {
       if (!user?.email) throw new Error('User email not found');
       const { data } = await axios.get(
-        `http://localhost:3000/jobs/${user.email}`
+        `https://track2hired-server.onrender.com/jobs/${user.email}`,{
+          withCredentials: true
+        }
       );
       return data as Job[];
     },
@@ -67,7 +69,9 @@ const Jobs = () => {
     mutationFn: async (jobId: string) => {
       setGeneratingJobId(jobId);
       const response = await axios.post(
-        `http://localhost:3000/generate-cover-letter/${jobId}`
+        `https://track2hired-server.onrender.com/generate-cover-letter/${jobId}`,{
+          withCredentials: true
+        }
       );
       return response.data;
     },

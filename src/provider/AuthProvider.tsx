@@ -33,7 +33,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const getJwtCookie = async (email: string) => {
     try {
       await axios.post(
-        'http://localhost:3000/jwt',
+        'https://track2hired-server.onrender.com/jwt',
         { email },
         { withCredentials: true } // This is important!
       );
@@ -69,7 +69,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         };
         try {
           await getJwtCookie(email);
-          await axios.post('http://localhost:3000/create-user', userData);
+          await axios.post('https://track2hired-server.onrender.com/create-user', userData,{
+            withCredentials: true
+          });
           setUser(userData);
           return {
             success: true,
@@ -158,7 +160,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
             if (isNewUser) {
               // Call your create-user API
               try {
-                await axios.post('http://localhost:3000/create-user', userData);
+                await axios.post('https://track2hired-server.onrender.com/create-user', userData,{
+                  withCredentials: true});
                 console.log('User record created in database');
               } catch (error) {
                 console.error('Failed to create user record:', error);
@@ -183,7 +186,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       await signOut(auth);
       await axios.post(
-        'http://localhost:3000/logout',
+        'https://track2hired-server.onrender.com/logout',
         {},
         { withCredentials: true }
       );

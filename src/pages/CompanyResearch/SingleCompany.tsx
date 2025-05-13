@@ -37,7 +37,10 @@ const SingleCompany = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/companySearch/${jobID}`
+        `https://track2hired-server.onrender.com/companySearch/${jobID}`,
+        {},
+        {
+          withCredentials: true}
       );
       refetchJobs();
       const companyResearch = response.data.companyResearch;

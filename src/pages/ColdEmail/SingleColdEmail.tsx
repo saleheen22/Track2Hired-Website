@@ -35,7 +35,11 @@ const SingleColdEmail = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/cold-email/${jobID}`
+        `https://track2hired-server.onrender.com/cold-email/${jobID}`,
+        {},
+        {
+          withCredentials: true,
+        }
       );
       refetchJobs();
       const coldEmail = response.data.coldEmail;
