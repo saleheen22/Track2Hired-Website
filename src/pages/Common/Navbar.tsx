@@ -66,9 +66,9 @@ const Navbar = () => {
               );
             } else if (menu === 'About Us') {
               return (
-                <a className="text-xl" key={idx} href="#about">
-                  {menu}
-                </a>
+                  <a className="text-xl" key={idx} href="/about">
+                    {menu}
+                  </a>
               );
             } else {
               return null;
@@ -156,7 +156,7 @@ const Navbar = () => {
                 );
               } else if (menu === 'About Us') {
                 return (
-                  <a className="text-lg py-2 block" key={idx} href="#about">
+                  <a className="text-lg py-2 block" key={idx} href="/about">
                     {menu}
                   </a>
                 );
