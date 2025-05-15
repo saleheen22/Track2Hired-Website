@@ -56,7 +56,10 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchJobs = async () => {
-    if (!user?.email) return;
+    if (!user?.email){
+      setJobs([]);
+      return;
+    } 
 
     try {
       setIsLoading(true);
@@ -66,6 +69,7 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
       );
       setJobs(response.data);
     } catch (error) {
+      setJobs([]);
       console.error('Failed to load jobs:', error);
     } finally {
       setIsLoading(false);
@@ -73,6 +77,7 @@ export const JobsProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
+    setJobs([]);
     fetchJobs();
   }, [user]);
   const refetchJobs = async () => {
