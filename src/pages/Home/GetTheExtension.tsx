@@ -31,9 +31,20 @@ const GetTheExtension = () => {
               ></path>
             </svg>
           </button>
-          <button className="btn bg-blue-800 text-white font-bold md:text-lg p-4">
-            Download Extension
-          </button>
+
+          <button
+  className="btn bg-blue-800 text-white font-bold md:text-lg p-4"
+  onClick={() =>
+    window.open(
+      'https://chromewebstore.google.com/detail/dnjmllkdcldkckglemabmmcihdnbdajk?utm_source=item-share-cb',
+      '_blank',
+      'noopener,noreferrer'
+    )
+  }
+>
+ Download Extension
+</button>
+          
         </div>
       </div>
     </div>

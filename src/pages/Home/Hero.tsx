@@ -34,9 +34,18 @@ const Hero = () => {
           </p>
 
           <div className=" flex  justify-center gap-10    ">
-            <button className="btn bg-blue-500  text-white  xl:text-xl text-center sm:p-6 md:text-lg rounded-xl w-1/3 md:w-auto">
-              Get The Extension
-            </button>
+                      <button
+                className="btn bg-blue-500 text-white xl:text-xl text-center sm:p-6 md:text-lg rounded-xl w-1/3 md:w-auto"
+                onClick={() =>
+                  window.open(
+                    'https://chromewebstore.google.com/detail/dnjmllkdcldkckglemabmmcihdnbdajk?utm_source=item-share-cb',
+                    '_blank',
+                    'noopener,noreferrer'
+                  )
+                }
+              >
+                Get The Extension
+              </button>
             <button className="btn bg-white text-center border-2 border-blue-500 text-blue-500 sm:p-6 md:text-lg xl:text-xl rounded-xl w-1/3 md:w-auto">
               <Link to="/about">Learn More</Link>
             </button>
