@@ -23,28 +23,29 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     setLoading(true);
     await signInWithGoogle();
+    await refetchJobs();
     setLoading(false);
-    refetchJobs();
+    
     navigate('/dashboard');
   };
-  const onSubmit = (data: LoginFormValues) => {
-    setLoading(true);
-    signInNewUser(data)
-      .then(userCredential => {
-        // Signed in
-        if (userCredential) {
-          setLoading(false);
-          refetchJobs();
-          navigate('/dashboard');
-        }
-      })
-      .catch(error => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const errorCode = error.code;
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const errorMessage = error.message;
-      });
-  };
+
+   const onSubmit = async (data: LoginFormValues) => {
+  setLoading(true);
+  try {
+    const userCredential = await signInNewUser(data);
+    if (userCredential) {
+      await refetchJobs();
+      setLoading(false);
+      navigate('/dashboard');
+    }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error) {
+    setLoading(false);
+    // handle error if needed
+  }
+};
+      
+  
   if (loading) {
     return <Loader message="Logging you in..." />;
   }

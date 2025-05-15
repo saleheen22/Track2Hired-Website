@@ -7,10 +7,12 @@ import 'highcharts/highcharts-3d';
 import { JobsContext } from '../../provider/JobsProvider';
 import Loader from '../Common/Loader';
 
+import {AuthContext} from '../../provider/AuthProvider'
 const JobDashboard = () => {
   const { jobs, isLoading } = useContext(JobsContext);
+  const {user}  = useContext(AuthContext)
 
-  if (isLoading) {
+  if (isLoading || !user?.email) {
     return <Loader message="Loading dashboard data..." />;
   }
 

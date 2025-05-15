@@ -21,24 +21,26 @@ const Register = () => {
     reset,
   } = useForm<RegisterFormValues>();
 
-  const onSubmit = (data: RegisterFormValues) => {
-    const { email, password, firstName, lastName } = data;
-    setLoading(true);
-
-    createNewUser({ email, password, firstName, lastName })
-      .then(userCredential => {
-        setLoading(false);
-        if (userCredential.success) {
-          reset();
-          refetchJobs();
-          navigate('/dashboard');
-        }
-      })
-      .catch(error => {
-        setLoading(false);
-        console.log(error.code, error.message);
-      });
-  };
+const onSubmit = async (data: RegisterFormValues) => {
+  const { email, password, firstName, lastName } = data;
+  setLoading(true);
+  try {
+    const userCredential = await createNewUser({ email, password, firstName, lastName });
+    if (userCredential.success) {
+      reset();
+      await refetchJobs();
+      setLoading(false);
+      navigate('/dashboard');
+    } else {
+      setLoading(false);
+      // Optionally show userCredential.message as an error
+    }
+  } catch (error) {
+    setLoading(false);
+    // Optionally handle error
+    console.log(error);
+  }
+};
 
   if (loading) {
     return <Loader message="Creating your account..." />;
